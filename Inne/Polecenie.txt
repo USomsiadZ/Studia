@@ -1,0 +1,24 @@
+Ponizsze zadania wykonajcie z pomoca opisanych w dostępnym na cez pliku Podstawowe polecenia linux.pdf bez pipe i skryptów powłoki
+
+1) Usuń wszystkie pliki z rozszerzeniem .jpg, których rozmiar jest większy niż 2137 bajtów.
+find ~/ -name "*.jpg" -size +2137c -delete
+2) Znajdź pozostałe pliki z rozszerzeniem .jpg.
+find ~/ -name *.jpg
+3) Nazwy plików .jpg uzyskane w pkt2 to nazwa folderu oraz nazwa pliku(bez rozszerzenia) ktory sie w nim znajduje, znajdz taką kombinację, sprawdz rozszerzenie pliku ktory znjadziesz
++d2
++r2
+4) znajdz plik którego rozmiar mieści się w przedziale od 1024 do 2048 KB i ma rozszerzenie jak plik znaleziony w pkt 3
+find ~/ *.dll -size +1024k -size -2048k -print
+./frost/orange/rel/kolokwium.dll
+5) Weź pierwsze oraz ostatnie litery z nazw trzech ostatnich folderów znalezionych w zadaniu 4 (np. jeśli ścieżka to /AfolB/CfolD/EfolF/szukany.plik, wynik to ACEBDF). Znajdź folder o takiej nazwie, który nie jest pusty (zawiera pliki).
+find ~/ -type d -name "fortel" ! -empty
+6) Z folderu znalezionego w poprzednim zadaniu usuń wszystkie pliki tekstowe, których nazwa (bez rozszerzenia) zawiera pierwszą literę Waszych nazwisk (np. dla nazwisk Nowak i Kowalski usuwamy wszystkie pliki tekstowe zawierające w nazwie literę N lub K (pomijajac rozszerzenie po kropce czyli plik.nk zostaje)).
+rm *p*.txt 
+rm *l*.txt 
+7) Znajdź największy plik tekstowy pozostały w folderze i wypisz jego zawartość.
+ls -lS | head -n 1
+8) W głównym folderze zadania oraz jego podfolderach znajdź pliki .png, których nazwa spełnia warunki podane w pliku znalezionym w zadaniu 7.
+
+9) W głównym folderze oraz jego podfolderach znajdź plik, którego rozszerzenie jest równe liczbie znalezionych wcześniej plików (np. jeśli znaleziono 4 pliki, to szukamy pliku z rozszerzeniem .4).
+
+10) Skopiuj plik do katalogu nadrzędnego względem jego bieżącej lokalizacji.

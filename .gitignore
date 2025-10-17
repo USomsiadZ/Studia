@@ -5,3 +5,4 @@ easy/test.ipynb
 .idea
 /CMakeLists.txt
 /cmake-build-debug/
+/.venv

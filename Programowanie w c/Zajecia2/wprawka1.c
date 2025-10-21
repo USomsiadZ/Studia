@@ -4,12 +4,49 @@ Napisz program, który wczyta liczbę całkowitą, a następnie wypisze ją "od 
 */
 
 #include <stdio.h>
+void wypisz(int tablica[],int miejsce){
+    for(int l=0;l < miejsce;l++){
+        char rr;
+        int i = miejsce - l -1 ;
+        if(tablica[i] < 10){
+        printf("%d",tablica[i]);
+        }else{
+            int j = tablica[i];
+            rr = 'a' + j -10;
+            printf("%c",rr);
+
+        }
+    }
+    printf("\n");
+}
+int potega(int x,int p){
+    int liczba = x;
+    if(p == 0)return 1;
+    for(int i = 0;i < p;i++){
+        liczba *= x;
+    }
+    return liczba;
+}
+void to_base(int liczba,int base){
+    int tablica[128];
+    int r;
+    int i;
+    for(i=0;liczba != 0;i++){
+        r = liczba % base;
+        liczba /= base;
+        tablica[i] = r;
+    }
+    wypisz(tablica,i);
+    return;
+}
+
 int main(){
-    int liczba;
-    int wybor;
-    printf("Zamień na system 2\n");
-    printf("Zamień na system 8\n");
-    printf("Zamień na system 16\n");
-    printf("Podaj wybor");
-    scanf("%d",&wybor);
+    //1234(10) -> 10011010010(2)
+    //1234(10) -> 2322(8)
+    //1234(10) -> 4d2(8)
+    int liczba = 1234;
+    to_base(liczba,2);
+    to_base(liczba,8);
+    to_base(liczba,16);
+        
 }

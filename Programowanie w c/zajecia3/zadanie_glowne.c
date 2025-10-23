@@ -79,8 +79,8 @@ int czy_zgodne(char w1[128], char w2[128]) {
 }
 int scalenie(char w1[128],char w2[128]){
     char scalony[256];
-    strcpy(scalony,w1);
-    strcat(scalony,w2);
+    strcpy(scalony,w1); 
+    strcat(scalony,w2); 
     printf("%s\n",scalony);
 }
 int rot13(char w1[128]){// zamiast sizeof strlen

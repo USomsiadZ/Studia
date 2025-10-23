@@ -22,7 +22,9 @@ int logowanie(){
     scanf("%d",&kod_kapitana);
     while (kod_kapitana != 1234){
         ilosc_pozostalych_prob--;
+        
         while (getchar() != '\n'); 
+        
         if (ilosc_pozostalych_prob != 0){
             printf("Pozostalo %d prob\n",ilosc_pozostalych_prob);
         }

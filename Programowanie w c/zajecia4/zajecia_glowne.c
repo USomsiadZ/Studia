@@ -44,20 +44,30 @@ przy wprowadzaniu wartości offset do kalibracji.
 
 */
 #include <stdio.h>
+int readValue(double *value, double min, double max){
+if(*value >= min && *value <= max){
+    return 1;
+}
+else{
+    return 0;
+}
+}
 void showIntro(){
     puts("Witaj na statku orion");
     puts("Autor Hubert Parzych");
 }
 int showMenu(){
-    int wybor = 0;
+    double wybor = 0;
+    while (getchar() != '\n');
     puts("1. Wczytanie dane z czujnikow");
     puts("2. Wyświetalnie odczytow");
     puts("3. Przeprowadzenie kalibracji");
     puts("4. Naprawianie blednych odczytow");
     puts("5. Modyfikacja pojedynczego odczytu");
     puts("6. Zakonczenie programu");
-    scanf("%d",&wybor);
-    if(wybor <= 6 && wybor >= 1){
+    scanf("%lf",&wybor);
+    //if(wybor <= 6 && wybor >= 1){
+    if(readValue(&wybor,0,6)){
         return wybor;
     }
     else{
@@ -71,6 +81,16 @@ void readSensors(double sensors[], int n){
     for(int i = 0; i < n;i++){
         printf("Podaj %d wartosc \n",i);
         scanf("%lf",&sensors[i]);
+        while(1){
+            if(!(readValue(&sensors[i],-100,200))){
+                printf("Podaj poprawną wartość\n");
+                scanf("%lf",&sensors[i]);
+            }else{
+                break;
+            }
+            
+        }
+        
     }
 }
 void displaySensors(double sensors[], int n){

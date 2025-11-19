@@ -1,135 +1,90 @@
 /*
-Jest statek. Na jego pokładzie agenci wymieniają między sobą zaszyfrowane wiadomości, jednak z powodu ograniczeń systemu łączności mogą przesyłać jednorazowo nie więcej niż 128 znaków.
-Program powinien umożliwiać wprowadzenie dwóch tajnych wiadomości i wykonanie na nich następujących operacji:
-
-Odczyt długości transmisji
-Każda wiadomość musi zostać dokładnie zmierzona — system powinien wyświetlić długość obu wprowadzonych komunikatów, aby agenci mogli oszacować wielkość szyfrowanych danych.
-
-Sprawdzenie zgodności przekazu
-Czasami różne sekcje Oriona przesyłają odmienne wersje tego samego komunikatu. System ma porównać dwie wiadomości i sprawdzić, czy są one identyczne, ignorując przy tym różnice w wielkości liter.
-
-Scalenie transmisji
-W razie potrzeby agenci mogą połączyć dwa komunikaty w jeden dłuższy. Program ma utworzyć nową wiadomość, powstałą przez połączenie obu tekstów, i wyświetlić wynikową transmisję.
-
-Szyfrowanie metodą ROT13
-W trosce o bezpieczeństwo danych agenci korzystają z klasycznego algorytmu ROT13. Program powinien zaszyfrować pierwszą wprowadzoną wiadomość, zastępując każdą literę alfabetu łacińskiego (a–z, A–Z) literą przesuniętą o 13 pozycji w alfabecie (cyklicznie).
-Przykład:
-
-Wejście:  Ala ma piłkę?
-Wynik:    Nyn zn cvłxę?
-Znaki spoza alfabetu pozostają bez zmian.
-(Uwaga: ponowne zastosowanie ROT13 na wyniku przywraca oryginalny tekst).
-
-Odczyt wsteczny
-W pewnych sytuacjach agenci Oriona muszą odczytać wiadomość przesłaną od końca. Program powinien odwrócić pierwszą wprowadzoną wiadomość i wyświetlić ją w tej postaci.
-
-Po wczytaniu dwóch wiadomości program powinien wyświetlić menu operacji, z którego użytkownik może wybierać odpowiednie polecenia, np.:
-
-=== TERMINAL ORION ONE ===
-1. Wyświetl długość obu wiadomości
-2. Porównaj wiadomości
-3. Połącz wiadomości
-4. Szyfruj wiadomość 1 (ROT13)
-5. Odwróć wiadomość 1
-0. Zakończ transmisję
-Wybierz opcję: 
-Menu powinno działać w pętli, umożliwiając agentowi wykonywanie wielu operacji bez ponownego uruchamiania programu.
-Wybór opcji 0 kończy działanie systemu i wyświetla komunikat o zakończeniu sesji transmisyjnej.
-
+Po uruchomieniu systemu należy wprowadzić liczbowy kod kapitana. Tylko jeden kod jest poprawny.
+Po błędnym kodzie wyświetlany jest komunikat o nieudanej próbie logowania wraz z informacją, ile prób (z trzech możliwych) jeszcze pozostało.
+Po trzech nieudanych próbach wyświetlany jest odpowiedni komunikat i program kończy działanie.
+Po poprawnym logowaniu system wyświetla menu:
+1 – Charge the reactor core: wczytaj dodatnią wartość i dodaj ją do poziomu energii.
+2 – Discharge the reactor core: wczytaj wartość i odejmij od poziomu energii (jeśli wystarczająca).
+3 – Check energy level: wyświetl aktualny poziom energii.
+0 – Log out: powrót do logowania (poziom energii jest zapamiętywany przez cały czas działania programu).
+Jeśli użytkownik wybierze niedostępną opcję (np. 4), program powinien o tym poinformować i ponownie wyświetlić menu.
+Każdorazowo system wyświetla informację, czy operacja została wykonana prawidłowo czy też nie (ujemna wartość energii, lub zbyt duża wartość zużycia)
+Dodatkowo system jest zabezpieczony przed podaniem wartości energii innej niż liczbowa - w takiej sytuacji wyświetla komunikat i ponawia wczytanie wartości (do skutku).
 */
+
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
-
-int menu() {
-    int wybor;
-    printf("\n\n\n\n=== TERMINAL ORION ONE ===\n");
-    printf("1. Wyswietl dlugosc obu wiadomosci\n");
-    printf("2. Porownaj wiadomosci (bez uwzgledniania wielkosci liter)\n");
-    printf("3. Polacz wiadomosci\n");
-    printf("4. Szyfruj wiadomosc 1 (ROT13)\n");
-    printf("5. Odwroc wiadomosc 1\n");
-    printf("0. Zakoncz transmisje\n");
-    printf("Wybierz opcje: \n\n\n");
-    scanf("%d", &wybor);
-    return wybor;
-}
-int dlugosc_transmisji(char w1[128],char w2[128]){
-    printf("Dlugosc widomosci nr 1 to %zu\n",strlen(w1));
-    printf("Dlugosc widomosci nr 2 to %zu\n",strlen(w2));
-    return 0;
-}
-int czy_zgodne(char w1[128], char w2[128]) {
-    if (strlen(w1) != strlen(w2)){
-        printf("Dlugosc nie jest zgodna");
-        return 0;}
-    for (int i = 0; i < strlen(w1); i++) {
-        if (tolower(w1[i]) != tolower(w2[i])){
-            printf("Nie są zgodne\n");
-            return 0;
-            }
+#include <time.h>
+int logowanie(){
+    int kod_kapitana;
+    int ilosc_pozostalych_prob = 3;
+    printf("Podaj kod kapitana\n");
+    scanf("%d",&kod_kapitana);
+    while (kod_kapitana != 1234){
+        ilosc_pozostalych_prob--;
+        
+        while (getchar() != '\n'); 
+        
+        if (ilosc_pozostalych_prob != 0){
+            printf("Pozostalo %d prob\n",ilosc_pozostalych_prob);
+        }
         else{
-            printf("Są zgodne\n");
-            return 1;
+            printf("Koniec programu");
+            exit(0);
         }
-            
     
-}
-}
-int scalenie(char w1[128],char w2[128]){
-    char scalony[256];
-    strcpy(scalony,w1); 
-    strcat(scalony,w2); 
-    printf("%s\n",scalony);
-}
-int rot13(char w1[128]){// zamiast sizeof strlen
-
-    for(int i=0;i< strlen(w1);i++){
-        char c = w1[i];
-        if (c >= 'A' && c <= 'Z') {
-            w1[i] = 'A' + ((c - 'A' + 13) % 26);
-        }
-        else if (c >= 'a' && c <= 'z') {
-            w1[i] = 'a' + ((c - 'a' + 13) % 26);
-        }
     }
-    printf("Zaszyfrowana wiadomosc to %s\n",w1);
+    return 1;
 }
-int odwrot(char w1[128]){
-    int dlugosc1 = strlen(w1);
-    char m;
-    for(int i=0;i< dlugosc1/2;i++){
-        m = w1[i];
-        w1[i]= w1[dlugosc1-i-1];
-        w1[dlugosc1-i-1] = m;
+int menu(){
+    int wybor;
+    int energia;
+    int wartosc;
+
+    srand(time(NULL));
+    energia = rand()%100 + 1;
+    
+    printf("1 – Charge the reactor core: wczytaj dodatnią wartość i dodaj ją do poziomu energii.\n");
+    printf("2 – Discharge the reactor core: wczytaj wartość i odejmij od poziomu energii (jeśli wystarczająca).\n");
+    printf("3 – Check energy level: wyświetl aktualny poziom energii.\n");
+    printf("0 – Log out: powrót do logowania (poziom energii jest zapamiętywany przez cały czas działania programu).\n");
+    while(1){
+    while (getchar() != '\n'); 
+    scanf("%d",&wybor);
+    if (wybor == 1){
+        scanf("%d",&wartosc);
+        if (wartosc>0){
+            energia = energia + wartosc;
+            if(energia > 100){
+            printf("Energia jest za duza");
+            energia = energia - wartosc;}
+        }
+        else{
+            printf("wartosc nie jest dodatnia\n");
+        }
+        
     }
-    printf("Odwrocona wiadomosc to %s\n",w1);
+    else if (wybor == 2){
+                scanf("%d",&wartosc);
+                energia = energia - wartosc;
+                if(energia < 0){
+                printf("Energia jest za mała\n");
+                energia = energia + wartosc;}
+    }
+    else if (wybor == 3){
+        printf("Wartość energi %d\n",energia);
+    }
+    else if (wybor == 0){
+        logowanie();
+    }
+    else if (!(wybor >0 && wybor <3)){
+        printf("Wybor nie jest poprawny albo wprowadzono nie poprawną liczbe\n");
+    }
+    }
 }
-
-
 int main(){
-char wiadomosc1[128];
-char wiadomosc2[128];
-int wybor;
-printf("Pierwsza wiadomosc:");
-scanf(" %127[^\n]", wiadomosc1);
 
-printf("Druga wiadomosc:");
-scanf(" %127[^\n]", wiadomosc2);
-while(1){
-    wybor = menu();
-    switch (wybor)
-    {
-        case 1: dlugosc_transmisji(wiadomosc1,wiadomosc2);break;
-        case 2: czy_zgodne(wiadomosc1,wiadomosc2);break;
-        case 3: scalenie(wiadomosc1,wiadomosc2);break;
-        case 4: rot13(wiadomosc1);break;
-        case 5: odwrot(wiadomosc1);break;
-        case 0: exit(0);break;
-    }
+    logowanie();
+    menu();
 
-
-}
-return 0;
 }

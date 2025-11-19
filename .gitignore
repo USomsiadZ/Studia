@@ -6,3 +6,5 @@ easy/test.ipynb
 /CMakeLists.txt
 /cmake-build-debug/
 /.venv
+**/*.dSYM
+**/output

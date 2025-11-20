@@ -25,7 +25,7 @@ void control(int character[2], int mapa[MAPAX][MAPAY]) {
             }
             break;
         case 's':
-            if (y + 1 < MAPAY && mapa[x][y + 1]==42) {
+            if (y + 1 < MAPAY && mapa[x][y + 1]==B_GRASS) {
                 y += 1;
             }
             break;
@@ -37,8 +37,8 @@ void control(int character[2], int mapa[MAPAX][MAPAY]) {
         return;
     }
 
-    mapa[character[0]][character[1]] = 42;
+    mapa[character[0]][character[1]] = B_GRASS;
     character[0] = x;
     character[1] = y;
-    mapa[x][y] = 100;
+    mapa[x][y] = B_PLAYER;
 }

@@ -11,16 +11,17 @@ int main(){
         character[i].x = i;     
     }
     for(int i = 0;i < ILOSC_GRACZY;i++){
-        mapa[character[i].x][character[i].y] = 100 + i;
+        mapa[character[i].x][character[i].y] = B_PLAYER;
     }
     int character_xy[2] = {character[0].x,character[0].y};
     //int character[3] = {0,0,0};
     
-    mapa[2][1] = 50;
+    mapa[2][1] = B_BOX;
     while(1){
         render(mapa);
         printf("\n[x : %d  y: %d]",character_xy[0],character_xy[1]);
         control(character_xy,mapa);
+        
         
     }
     render(mapa);

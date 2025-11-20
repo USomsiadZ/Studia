@@ -9,23 +9,23 @@ void control(int character[2], int mapa[MAPAX][MAPAY]) {
     int y = character[1];
 
     switch (znak) {
-        case 'w':
-            if (x > 0) {
+        case 'a':
+            if (x > 0 && mapa[x-1][y]==B_GRASS ) {
                 x -= 1;
             }
             break;
-        case 's':
-            if (x + 1 < MAPAX) {
+        case 'd':
+            if (x + 1 < MAPAX && mapa[x+1][y]==B_GRASS) {
                 x += 1;
             }
             break;
-        case 'a':
-            if (y > 0) {
+        case 'w':
+            if (y > 0 && mapa[x][y - 1]==B_GRASS) {
                 y -= 1;
             }
             break;
-        case 'd':
-            if (y + 1 < MAPAY) {
+        case 's':
+            if (y + 1 < MAPAY && mapa[x][y + 1]==42) {
                 y += 1;
             }
             break;

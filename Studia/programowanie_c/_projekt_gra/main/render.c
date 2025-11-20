@@ -14,8 +14,9 @@ void render(int mapa[MAPAX][MAPAY]){
     printf("\033[H\033[J");
     for(int x = 0;x < MAPAX;x++){
         for(int y = 0;y < MAPAY;y++){
+        //for(int y = MAPAY;y > 0;y--){
             //printf("%d",mapa[x][y]);
-            pixel(mapa[x][y]);
+            pixel(mapa[y][x]);
         }
         puts("");
     }

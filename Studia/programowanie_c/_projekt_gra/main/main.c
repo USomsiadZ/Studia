@@ -2,15 +2,26 @@
 #include "render.c"
 #include "control.c"
 
-int main() {
+int main(){
     int mapa[MAPAX][MAPAY];
-    int character[3] = {0,0,0};
+    struct characters character[ILOSC_GRACZY];
     fill_map_grass(mapa);
-    mapa[character[0]][character[1]] = 100;
-    mapa[0][1] = 43;
+    for(int i = 0;i < ILOSC_GRACZY;i++){
+        character[i].y = 0;
+        character[i].x = i;     
+    }
+    for(int i = 0;i < ILOSC_GRACZY;i++){
+        mapa[character[i].x][character[i].y] = 100 + i;
+    }
+    int character_xy[2] = {character[0].x,character[0].y};
+    //int character[3] = {0,0,0};
+    
+    mapa[2][1] = 50;
     while(1){
         render(mapa);
-        control(character,mapa);
+        printf("\n[x : %d  y: %d]",character_xy[0],character_xy[1]);
+        control(character_xy,mapa);
+        
     }
     render(mapa);
     return 0;

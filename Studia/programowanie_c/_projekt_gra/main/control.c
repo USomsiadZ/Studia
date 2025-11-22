@@ -1,14 +1,13 @@
 #include "data.h"
 #include "main.h"
-int control(int character[3]) {
+int control() {
     char znak;
     if (scanf(" %c", &znak) != 1) {
         return stary_block;
     }
-    
-    int x = character[0];
-    int y = character[1];
-    int z = character[2];
+    int x = character[0].x;
+    int y = character[0].y;
+    int z = character[0].z;
     mapa[x][y][z] = stary_block;
     switch (znak) {
         case 'a':
@@ -38,9 +37,9 @@ int control(int character[3]) {
 
     stary_block = mapa[x][y][z];
     //mapa[character[0]][character[1]][character[2]] = stary_block;
-    character[0] = x;
-    character[1] = y;
-    character[2] = z;
+    character[0].x = x;
+    character[0].y = y;
+    character[0].z = z;
     mapa[x][y][z] = B_PLAYER;
     return stary_block;
 }

@@ -11,7 +11,7 @@
 
 
 # TODO
-- stworzyc plik w którym funckje z graczami bedzie sie przetrzymywac # multiplayer.c∂∂
+
 - zrobic tablce mapa_dane[][][]
 - wypełnianie powietrzem # map.c
 - renderowanie najwyzszego bloku wedle xyz #render.c // zamiena 1 -> MAPAY

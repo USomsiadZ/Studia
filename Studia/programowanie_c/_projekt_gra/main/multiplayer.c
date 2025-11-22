@@ -6,6 +6,6 @@ void deklaracja_graczy(void){
         character[i].z = 0;     
     }
     for(int i = 0;i < ILOSC_GRACZY;i++){
-        mapa[character[i].x][character[i].y][character[i].z] = B_PLAYER;
+        render_map[character[i].x][character[i].y][character[i].z] = B_PLAYER;
     }
 }

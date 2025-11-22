@@ -18,5 +18,20 @@ struct characters{
     int y;
     int z;
     int hand;
+    int hp;
+};
+struct map{
+    int x;
+    int y;
+    int z;
+    int id;
+    int air;
+};
+struct item{
+    int id;
+    int durable;
+    int damage;
+    int block_attack;
+    int placeable;
 };
 #endif

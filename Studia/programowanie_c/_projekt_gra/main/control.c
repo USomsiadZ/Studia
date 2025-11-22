@@ -1,10 +1,11 @@
 #include "data.h"
-int control(int character[3], int mapa[MAPAX][MAPAY][MAPAZ],int stary_block) {
+#include "main.h"
+int control(int character[3]) {
     char znak;
     if (scanf(" %c", &znak) != 1) {
         return stary_block;
     }
-
+    
     int x = character[0];
     int y = character[1];
     int z = character[2];

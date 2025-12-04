@@ -11,6 +11,7 @@
 
 
 # TODO
+- mapa w struct
 - zrobic tablce mapa_dane[][][]
 - wypełnianie powietrzem # map.c
 - renderowanie najwyzszego bloku wedle xyz #render.c // zamiena 1 -> MAPAY

@@ -42,6 +42,30 @@ Zmodyfikuj wcześniejsze zadanie w taki sposób, by tworzenie, wypełnianie oraz
 #include <stdio.h>
 #include <stdlib.h>
 
+
+//tworzenie, wypełnianie oraz zwalnianie,zmiana wielkosc tablicy
+void free_tab(int *tab){
+    free(tab);
+    tab = NULL;
+
+}
+int* new_tab(int size){
+    int *tab = malloc(size * sizeof(int));
+    return tab;
+}
+void fill_tab(int *tab,int size){
+    for (int i = 0; i < size; i++)
+    {
+        scanf("%d",(tab + i));
+    }
+    printf("\n\n\n");
+}
+int* size_tab(int *tab,int size){
+    int *tmp = realloc(tab,size * sizeof(void*));
+    return tmp ? tmp : tab;
+}
+
+// Funkcje
 void edit_crystal(int *tab,int *br){
     int input = 0;
     int *p = NULL;
@@ -102,22 +126,23 @@ void printArray(const int *tab, int size){
         printf("%d\n",*(tab + i));
     }
 }
+// Menu
 void show_menu(){
     printf("1) Edytuj\n");
     printf("2) Średnia\n");
     printf("3) Minimalna\n");
     printf("4) Maksymalna\n");
     printf("5) Zamiana\n");
-    printf(" ");
-    printf(" ");
+    printf("6) Wypełnij tab\n");
+    printf("7) Zmien wielkosc tab\n");
 }
 void menu(int *tab,int size){
     int br = 0;
     int input = 0;
-    int wartosc1,wartosc2;
+    int wartosc1,wartosc2,new_size;
 
     while(br == 0){
-        printArray(tab,4);
+        printArray(tab,size);
         show_menu();
         scanf("%d",&input);
         switch (input)
@@ -143,7 +168,13 @@ void menu(int *tab,int size){
             swapValues((tab + wartosc1 - 1),(tab + wartosc2 -1));
             break;
         case 6:
-
+            fill_tab(tab,size);
+            break;
+        case 7:
+            printf("Podaj nowy rozmiar: ");
+            scanf("%d",&new_size);
+            tab = size_tab(tab,new_size);
+            size = new_size;
             break;
         }
 
@@ -153,14 +184,18 @@ void menu(int *tab,int size){
     
 }
 
-int main(){
-    int size = 4;
-    int *tab = malloc(size * sizeof(int));
-    fill_value(tab,size);
-    
-    
 
+int main(){
+    int size = 3;
+    printf("Jaka wielkosc tablicy: ");
+    scanf("%d",&size);
+    int *tab = new_tab(size);
+    
+    
+    
+    
+    fill_value(tab,size);
     menu(tab,size);
 
-
+    free_tab(tab);
 }

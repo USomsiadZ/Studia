@@ -8,3 +8,4 @@ easy/test.ipynb
 /.venv
 **/*.dSYM
 **/output
+.github

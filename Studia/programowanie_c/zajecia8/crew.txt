@@ -1,0 +1,6 @@
+Science_Officer:Spock
+Communications:Uhura
+Helm:Sulu
+Engineering:Scotty
+Security:Chekov
+Captain:Kirk

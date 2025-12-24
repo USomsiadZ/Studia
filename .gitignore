@@ -9,3 +9,4 @@ easy/test.ipynb
 **/*.dSYM
 **/output
 .github
+.ignore

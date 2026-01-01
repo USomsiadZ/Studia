@@ -70,7 +70,11 @@ System Orion One nie może przechowywać logów zawierających nieprawidłowe lu
 */
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
+#include <string.h>
+#include <ctype.h>
 #include <stdbool.h>
+
 enum SystemType {
     SYSTEM_ENGINE,
     SYSTEM_LIFESUPPORT,
@@ -85,6 +89,7 @@ enum Severity {
     SEV_WARNING,
     SEV_CRITICAL
 };
+
 struct LogEntry {
     int id;                // identyfikator (nadawany automatycznie, narastająco)
     char message[64];      // treść komunikatu
@@ -93,56 +98,89 @@ struct LogEntry {
     int timestamp;
     bool processed;        // czy log został już rozpatrzony
 };
-typedef struct Node {
-    struct LogEntry entry;
-    struct Node* next; // wskaźnik do kolejnego elementu
-} Node;
 
-Node* push_back(Node* head, struct LogEntry entry) {
-    Node* n = calloc(1, sizeof(Node));
-    n->entry = entry;
-    n->next = NULL;
 
-    if (head == NULL)
-        return n;
+typedef struct Node{
+    struct LogEntry log;
+    struct Node *next;
+}Node;
 
-    Node* p = head;
+void new_log(Node **head, enum Severity severity, enum SystemType system, int timestamp, char message[64]){
+    //brak obsługi pustej listy
+    Node *n = calloc(1, sizeof(Node));
+    if (n == NULL) {
+        printf("Błąd alokacji pamięci");
+        return;
+    }
+    int i = 0;
+    Node *p = *head;
     while (p->next != NULL) {
+        i++;
         p = p->next;
     }
+    
+    
+    n->log.id = i + 1;
+    n->log.processed = false;
+    n->log.severity = severity;
+    n->log.system = system;
+    n->log.timestamp = timestamp;
+    strcpy(n->log.message,message);
+    n->next = NULL;
+    
+    
+
     p->next = n;
-    return head;
+
 }
-void dodanie_odczytu(Node** head, int* next_id) {
-    char message[64];
-    int system, poziom, czas;
-    
-    printf("Podaj treść komunikatu (max 63 znaki): ");
-    scanf("%63s", message);
-    
-    printf("Podaj system źródłowy (0-5): ");
-    scanf("%d", &system);
-    
-    printf("Podaj poziom istotności (0-2): ");
-    scanf("%d", &poziom);
-    
-    printf("Podaj czas wystąpienia: ");
-    scanf("%d", &czas);
-    
-    struct LogEntry entry;
-    entry.id = *next_id;
-    strcpy(entry.message, message);
-    entry.system = system;
-    entry.severity = poziom;
-    entry.timestamp = czas;
-    entry.processed = false;
-    
-    *head = push_back(*head, entry);
-    (*next_id)++;
+
+
+
+
+
+
+
+
+void show_menu(){
+    printf("1)\n");
+    printf("2)\n");
+    printf("3)\n");
+    printf("4)\n");
+    printf("0)\n");
+}
+int option_menu(Node **head){
+    int wybor;
+    scanf("%d", &wybor);
+    switch(wybor) {
+        case 1:
+            printf("Wybrano opcję 1\n");
+            break;
+        case 2:
+            printf("Wybrano opcję 2\n");
+            break;
+        case 3:
+            printf("Wybrano opcję 3\n");
+            break;
+        case 4:
+            printf("Wybrano opcję 4\n");
+            break;
+        case 0:
+            printf("Wyjście z programu\n");
+            return 0;
+        default:
+            printf("Nieznana opcja\n");
+            break;
+    }
+    return 1;
 }
 int main(){
-    //Odczytaj treść komunikatu, system źródłowy, poziom istotności i czas wystąpienia. Utwórz nowy wpis logu z automatycznym id i processed = false. Wstaw go na koniec listy.
     Node *head = NULL;
-    
+    while(1){
+        show_menu();
+        if(option_menu(&head) == 0){
+            break;
+        }
+        // kod
+    }
     return 0;
 }

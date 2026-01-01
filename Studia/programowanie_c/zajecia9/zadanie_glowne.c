@@ -21,8 +21,8 @@ Celem zadania jest napisanie programu, który przeprowadza cały powyższy proce
 6. Obliczyć odległość każdego punktu od pozycji statku (wzór euklidesowy){}
 7. Usunąć z tablicy wszystkie punkty, których odległość przekracza promień radaru{}
 8. Zaktualizować rozmiar tablicy po usunięciu punktów{}
-9. Zapisć pozostałe współrzędne do pliku binarnego (format binarny)
-10. Zwolnić zaalokowaną pamięć dynamiczną
+9. Zapisć pozostałe współrzędne do pliku binarnego (format binarny){}
+10. Zwolnić zaalokowaną pamięć dynamiczną{}
 */
 // Plik: 11 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30
 

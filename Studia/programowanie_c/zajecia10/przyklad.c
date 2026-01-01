@@ -69,14 +69,17 @@ int main(void) {
 
 
 void print_stardate(Stardate s) {
+    // Wypisuje datę w formacie major.minor
     printf("%d.%d", s.major, s.minor);
 }
 bool stardate_less_equal(Stardate a, Stardate b) {
+    // Sprawdza czy data a jest mniejsza lub równa dacie b
     if (a.major < b.major) return true;
     if (a.major > b.major) return false;
     return a.minor <= b.minor;
 }
 Node* push_back(Node* head, Stardate date, double rad) {
+    // Dodaje nowy element na końcu listy
     Node* n = calloc(1, sizeof(Node));
     n->date = date;
     n->rad = rad;
@@ -92,6 +95,7 @@ Node* push_back(Node* head, Stardate date, double rad) {
     return head;
 }
 Node* push_front(Node* head, Stardate date, double rad) {
+    // Dodaje nowy element na początku listy
     Node* n = calloc(1, sizeof(Node));
     n->date = date;
     n->rad = rad;
@@ -99,6 +103,7 @@ Node* push_front(Node* head, Stardate date, double rad) {
     return n;   
 }
 Node* free_list(Node* head) {
+    // Zwalnia pamięć zajmowaną przez wszystkie elementy listy
     Node* p = head;
     while (p != NULL) {
         Node* next = p->next;  
@@ -108,6 +113,7 @@ Node* free_list(Node* head) {
     return NULL;               
 }
 void print_list(Node* head) {
+    // Wypisuje wszystkie elementy listy z datą i poziomem promieniowania
     Node* p = head;
     while (p != NULL) {
         print_stardate(p->date);
@@ -116,6 +122,7 @@ void print_list(Node* head) {
     }
 }
 int count_elements(Node* head) {
+    // Liczy liczbę elementów w liście
     int count = 0;
     for (Node* p = head; p != NULL; p = p->next) {
         count++;
@@ -123,6 +130,7 @@ int count_elements(Node* head) {
     return count;
 }
 bool average(Node* head, double* result) {
+    // Oblicza średnią poziomu promieniowania z wszystkich elementów listy
     int count = 0;
     double sum = 0;
 
@@ -138,6 +146,7 @@ bool average(Node* head, double* result) {
     return true;
 }
 bool find_min(Node* head, double* result) {
+    // Znajduje minimalną wartość promieniowania w liście
     if (head == NULL) return false;
 
     double min = head->rad;
@@ -149,6 +158,7 @@ bool find_min(Node* head, double* result) {
     return true;
 }
 bool find_max(Node* head, double* result) {
+    // Znajduje maksymalną wartość promieniowania w liście
     if (head == NULL) return false;
 
     double max = head->rad;
@@ -160,6 +170,7 @@ bool find_max(Node* head, double* result) {
     return true;
 }
 int count_range(Node* head, Stardate from, Stardate to) {
+    // Liczy elementy w liście, których data mieści się w podanym zakresie
     int result = 0;
 
     bool count_all = (from.major == -1 && to.major == -1);
@@ -176,6 +187,7 @@ int count_range(Node* head, Stardate from, Stardate to) {
     return result;
 }
 Node* filter_by_radiation(Node* head, double threshold) {
+    // Tworzy nową listę zawierającą tylko elementy z promieniowaniem powyżej progu
     Node* result = NULL;
 
     for (Node* p = head; p != NULL; p = p->next) {

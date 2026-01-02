@@ -10,3 +10,4 @@ easy/test.ipynb
 **/output
 .github
 .ignore
+.cursor

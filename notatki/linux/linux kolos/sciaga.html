@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Ściąga - Bash</title>
+  <link rel="stylesheet" href="../gotowe/dark-style.css" />
+  <style>
+    body { font-size: 14px; max-width: 900px; }
+    h1 { font-size: 1.8rem; margin-bottom: 1rem; }
+    h2 { font-size: 1.3rem; margin-top: 1.5rem; margin-bottom: 0.7rem; }
+    h3 { font-size: 1.1rem; margin-top: 1rem; margin-bottom: 0.5rem; }
+    table { font-size: 0.9rem; margin: 0.8rem 0; }
+    code { font-size: 0.85em; }
+    pre { padding: 0.7rem; margin: 0.7rem 0; }
+    .compact { margin: 0.3rem 0; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<h1>Ściąga Bash - Egzamin</h1>
+
+<div class="grid">
+
+<div>
+<h2>Operatory porównania</h2>
+
+<h3>Liczby</h3>
+<table>
+<tr><th>Operator</th><th>Znaczenie</th></tr>
+<tr><td><code>-eq</code></td><td>równy (equal)</td></tr>
+<tr><td><code>-ne</code></td><td>nierówny (not equal)</td></tr>
+<tr><td><code>-lt</code></td><td>mniejszy (less than)</td></tr>
+<tr><td><code>-le</code></td><td>≤ (less or equal)</td></tr>
+<tr><td><code>-gt</code></td><td>większy (greater than)</td></tr>
+<tr><td><code>-ge</code></td><td>≥ (greater or equal)</td></tr>
+</table>
+
+<h3>Stringi</h3>
+<table>
+<tr><th>Operator</th><th>Znaczenie</th></tr>
+<tr><td><code>=</code> lub <code>==</code></td><td>równy</td></tr>
+<tr><td><code>!=</code></td><td>nierówny</td></tr>
+<tr><td><code>-z</code></td><td>pusty string</td></tr>
+<tr><td><code>-n</code></td><td>niepusty string</td></tr>
+</table>
+
+<h3>Pliki</h3>
+<table>
+<tr><th>Operator</th><th>Znaczenie</th></tr>
+<tr><td><code>-f</code></td><td>plik istnieje</td></tr>
+<tr><td><code>-d</code></td><td>katalog istnieje</td></tr>
+<tr><td><code>-e</code></td><td>plik/katalog istnieje</td></tr>
+<tr><td><code>-r</code></td><td>można czytać</td></tr>
+<tr><td><code>-w</code></td><td>można pisać</td></tr>
+<tr><td><code>-x</code></td><td>można wykonać</td></tr>
+<tr><td><code>-s</code></td><td>niepusty plik</td></tr>
+</table>
+</div>
+
+<div>
+<h2>Zmienne specjalne</h2>
+<table>
+<tr><th>Zmienna</th><th>Znaczenie</th></tr>
+<tr><td><code>$0</code></td><td>nazwa skryptu</td></tr>
+<tr><td><code>$1, $2, ...</code></td><td>argumenty</td></tr>
+<tr><td><code>$#</code></td><td>liczba argumentów</td></tr>
+<tr><td><code>$@</code></td><td>wszystkie argumenty</td></tr>
+<tr><td><code>$?</code></td><td>kod powrotu</td></tr>
+<tr><td><code>$$</code></td><td>PID procesu</td></tr>
+<tr><td><code>$RANDOM</code></td><td>liczba losowa 0-32767</td></tr>
+</table>
+
+<h2>Arytmetyka</h2>
+<pre><code>$((wyrażenie))           # obliczenia
+$((5 + 3))               # 8
+$((a * b))               # mnożenie
+$((x % 2))               # modulo (reszta)
+((i++))                  # inkrementacja</code></pre>
+
+<h2>Konwersje systemów</h2>
+<pre><code>$((2#1010))              # bin→dec (10)
+$((16#FF))               # hex→dec (255)
+$((8#77))                # oct→dec (63)</code></pre>
+</div>
+
+</div>
+
+<h2>Składnia</h2>
+
+<div class="grid">
+<div>
+<h3>If-else</h3>
+<pre><code>if [ warunek ]; then
+    # kod
+elif [ inny ]; then
+    # kod
+else
+    # kod
+fi</code></pre>
+
+<h3>For</h3>
+<pre><code>for i in {1..10}; do
+    echo $i
+done
+
+for file in *.txt; do
+    echo $file
+done</code></pre>
+</div>
+
+<div>
+<h3>While</h3>
+<pre><code>while [ warunek ]; do
+    # kod
+done
+
+# Czytanie pliku:
+while IFS= read -r line; do
+    echo "$line"
+done &lt; plik.txt</code></pre>
+
+<h3>Case</h3>
+<pre><code>case $var in
+    a|b) echo "a lub b" ;;
+    c)   echo "c" ;;
+    *)   echo "inne" ;;
+esac</code></pre>
+</div>
+</div>
+
+<h2>Komendy - najważniejsze</h2>
+
+<table>
+<tr><th>Komenda</th><th>Opis</th><th>Przykład</th></tr>
+<tr><td><code>grep</code></td><td>wyszukiwanie</td><td><code>grep -v "wzorzec" plik</code> (odwrócone)</td></tr>
+<tr><td><code>sed</code></td><td>edycja tekstu</td><td><code>sed 's/old/new/g' plik</code></td></tr>
+<tr><td><code>cut</code></td><td>wycinanie kolumn</td><td><code>cut -d';' -f2</code> (2. pole)</td></tr>
+<tr><td><code>sort</code></td><td>sortowanie</td><td><code>sort -t';' -k1n</code> (numerycznie)</td></tr>
+<tr><td><code>head</code></td><td>pierwsze linie</td><td><code>head -n 10</code> lub <code>head -10</code></td></tr>
+<tr><td><code>tail</code></td><td>ostatnie linie</td><td><code>tail -n +2</code> (od 2. linii)</td></tr>
+<tr><td><code>awk</code></td><td>przetwarzanie</td><td><code>awk -F';' '{print $1}'</code></td></tr>
+<tr><td><code>tr</code></td><td>zamiana znaków</td><td><code>tr a-z A-Z</code> (wielkie)</td></tr>
+<tr><td><code>wc</code></td><td>zliczanie</td><td><code>wc -l</code> (linie)</td></tr>
+<tr><td><code>uniq</code></td><td>unikalne</td><td><code>uniq -c</code> (z licznikiem)</td></tr>
+</table>
+
+<h2>Przekierowania</h2>
+
+<table>
+<tr><th>Operator</th><th>Znaczenie</th><th>Przykład</th></tr>
+<tr><td><code>&gt;</code></td><td>zapisz (nadpisz)</td><td><code>echo "tekst" &gt; plik</code></td></tr>
+<tr><td><code>&gt;&gt;</code></td><td>dopisz do pliku</td><td><code>echo "tekst" &gt;&gt; plik</code></td></tr>
+<tr><td><code>&lt;</code></td><td>wejście z pliku</td><td><code>tr a-z A-Z &lt; plik</code></td></tr>
+<tr><td><code>|</code></td><td>pipe (potok)</td><td><code>cat plik | grep "x"</code></td></tr>
+<tr><td><code>&amp;&amp;</code></td><td>i (gdy sukces)</td><td><code>mkdir x &amp;&amp; cd x</code></td></tr>
+<tr><td><code>||</code></td><td>lub (gdy błąd)</td><td><code>cd x || echo "błąd"</code></td></tr>
+</table>
+
+<h2>Wyrażenia regularne (regex)</h2>
+
+<table>
+<tr><th>Znak</th><th>Znaczenie</th><th>Przykład</th></tr>
+<tr><td><code>^</code></td><td>początek linii</td><td><code>^abc</code> (zaczyna się od abc)</td></tr>
+<tr><td><code>$</code></td><td>koniec linii</td><td><code>xyz$</code> (kończy się na xyz)</td></tr>
+<tr><td><code>.</code></td><td>dowolny znak</td><td><code>a.c</code> (abc, adc, a5c...)</td></tr>
+<tr><td><code>*</code></td><td>0 lub więcej</td><td><code>ab*c</code> (ac, abc, abbc...)</td></tr>
+<tr><td><code>+</code></td><td>1 lub więcej</td><td><code>ab+c</code> (abc, abbc...)</td></tr>
+<tr><td><code>?</code></td><td>0 lub 1</td><td><code>ab?c</code> (ac lub abc)</td></tr>
+<tr><td><code>[abc]</code></td><td>jeden z a,b,c</td><td><code>[0-9]</code> (cyfra)</td></tr>
+<tr><td><code>[^abc]</code></td><td>NIE a,b,c</td><td><code>[^0-9]</code> (nie cyfra)</td></tr>
+<tr><td><code>{n}</code></td><td>dokładnie n</td><td><code>[0-9]{3}</code> (3 cyfry)</td></tr>
+<tr><td><code>{n,m}</code></td><td>od n do m</td><td><code>[0-9]{1,3}</code> (1-3 cyfry)</td></tr>
+<tr><td><code>|</code></td><td>lub</td><td><code>ab|cd</code> (ab lub cd)</td></tr>
+</table>
+
+<h3>Gotowe wzorce</h3>
+<pre><code># IPv4 (uproszczony):
+[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}
+
+# Liczba binarna:
+^[01]+$
+
+# Email (prosty):
+^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$</code></pre>
+
+<h2>Przydatne konstrukcje</h2>
+
+<div class="grid">
+<div>
+<h3>Tablice</h3>
+<pre><code>arr=(a b c)              # deklaracja
+echo ${arr[0]}           # element 0
+echo ${arr[@]}           # wszystkie
+echo ${#arr[@]}          # długość
+arr+=(d)                 # dodaj element</code></pre>
+
+<h3>Funkcje</h3>
+<pre><code>nazwa() {
+    local var="wartość"
+    echo "$1"            # argument
+    return 0             # kod powrotu
+}
+
+nazwa "arg"              # wywołanie
+wynik=$?                 # kod powrotu</code></pre>
+</div>
+
+<div>
+<h3>Stringi</h3>
+<pre><code>${#var}                  # długość
+${var:0:5}               # substring (0-5)
+${var/old/new}           # zamień 1.
+${var//old/new}          # zamień wszystkie
+${var#prefix}            # usuń prefix
+${var%suffix}            # usuń suffix</code></pre>
+
+<h3>CSV</h3>
+<pre><code>while IFS=';' read -r a b c; do
+    echo "$a | $b | $c"
+done &lt; dane.csv
+
+tail -n +2 dane.csv      # bez nagłówka</code></pre>
+</div>
+</div>
+
+<h2>Szybkie testy</h2>
+
+<pre><code># Sprawdź składnię bez wykonywania:
+bash -n skrypt.sh
+
+# Debug (wypisuje każdą komendę):
+bash -x skrypt.sh
+
+# Lub w skrypcie:
+set -x                   # włącz debug
+set +x                   # wyłącz debug
+
+# Bezpieczny skrypt:
+set -euo pipefail        # wyjście przy błędzie</code></pre>
+
+</body>
+</html>

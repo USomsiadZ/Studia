@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>powtorzenie</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        background-color: #232629;
+        color: #7a7c7d;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #7a7c7d;  padding-left: 4px; }
+    div.sourceCode
+      { color: #cfcfc2; background-color: #232629; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #cfcfc2; } /* Normal */
+    code span.al { color: #95da4c; background-color: #4d1f24; font-weight: bold; } /* Alert */
+    code span.an { color: #3f8058; } /* Annotation */
+    code span.at { color: #2980b9; } /* Attribute */
+    code span.bn { color: #f67400; } /* BaseN */
+    code span.bu { color: #7f8c8d; } /* BuiltIn */
+    code span.cf { color: #fdbc4b; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #3daee9; } /* Char */
+    code span.cn { color: #27aeae; font-weight: bold; } /* Constant */
+    code span.co { color: #7a7c7d; } /* Comment */
+    code span.cv { color: #7f8c8d; } /* CommentVar */
+    code span.do { color: #a43340; } /* Documentation */
+    code span.dt { color: #2980b9; } /* DataType */
+    code span.dv { color: #f67400; } /* DecVal */
+    code span.er { color: #da4453; text-decoration: underline; } /* Error */
+    code span.ex { color: #0099ff; font-weight: bold; } /* Extension */
+    code span.fl { color: #f67400; } /* Float */
+    code span.fu { color: #8e44ad; } /* Function */
+    code span.im { color: #27ae60; } /* Import */
+    code span.in { color: #c45b00; } /* Information */
+    code span.kw { color: #cfcfc2; font-weight: bold; } /* Keyword */
+    code span.op { color: #cfcfc2; } /* Operator */
+    code span.ot { color: #27ae60; } /* Other */
+    code span.pp { color: #27ae60; } /* Preprocessor */
+    code span.re { color: #2980b9; background-color: #153042; } /* RegionMarker */
+    code span.sc { color: #3daee9; } /* SpecialChar */
+    code span.ss { color: #da4453; } /* SpecialString */
+    code span.st { color: #f44f4f; } /* String */
+    code span.va { color: #27aeae; } /* Variable */
+    code span.vs { color: #da4453; } /* VerbatimString */
+    code span.wa { color: #da4453; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="dark-style.css" />
+  <link rel="stylesheet" href="dark-style.css" />
+
+<style>
+/* Dark theme overrides */
+body {
+    background-color: #1e1e1e !important;
+    color: #d4d4d4 !important;
+}
+.jp-Notebook {
+    background-color: #1e1e1e !important;
+}
+.jp-Cell, .jp-InputArea, .jp-OutputArea {
+    background-color: #252526 !important;
+    color: #d4d4d4 !important;
+}
+.jp-RenderedHTMLCommon {
+    color: #d4d4d4 !important;
+}
+.jp-InputPrompt, .jp-OutputPrompt {
+    color: #4ec9b0 !important;
+}
+pre, code {
+    background-color: #2d2d2d !important;
+    color: #d4d4d4 !important;
+    border-color: #3e3e42 !important;
+}
+.highlight {
+    background-color: #2d2d2d !important;
+}
+a {
+    color: #569cd6 !important;
+}
+h1, h2, h3, h4, h5, h6 {
+    color: #4ec9b0 !important;
+}
+table {
+    background-color: #252526 !important;
+    border-color: #3e3e42 !important;
+}
+th {
+    background-color: #2d2d2d !important;
+    color: #4ec9b0 !important;
+}
+td {
+    border-color: #3e3e42 !important;
+    color: #d4d4d4 !important;
+}
+</style>
+
+</head>
+<body class="jp-Notebook dark-theme">
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#rozwiązania-zadań---bash"
+id="toc-rozwiązania-zadań---bash">Rozwiązania zadań - Bash</a>
+<ul>
+<li><a href="#zadanie-1-szachownica"
+id="toc-zadanie-1-szachownica">Zadanie 1: Szachownica</a></li>
+<li><a href="#zadanie-2-usuwanie-linii-z-pliku"
+id="toc-zadanie-2-usuwanie-linii-z-pliku">Zadanie 2: Usuwanie linii z
+pliku</a></li>
+<li><a href="#zadanie-3-gra-w-kamień-papier-nożyce"
+id="toc-zadanie-3-gra-w-kamień-papier-nożyce">Zadanie 3: Gra w kamień,
+papier, nożyce</a></li>
+<li><a href="#zadanie-4-konwerter-binarny-na-dziesiętny"
+id="toc-zadanie-4-konwerter-binarny-na-dziesiętny">Zadanie 4: Konwerter
+binarny na dziesiętny</a></li>
+<li><a href="#zadanie-5-szyfrowanie-adresów-ip"
+id="toc-zadanie-5-szyfrowanie-adresów-ip">Zadanie 5: Szyfrowanie adresów
+IP</a></li>
+<li><a href="#zadanie-6-przetwarzanie-csv---sortowanie-według-wieku"
+id="toc-zadanie-6-przetwarzanie-csv---sortowanie-według-wieku">Zadanie
+6: Przetwarzanie CSV - sortowanie według wieku</a></li>
+<li><a href="#uwagi" id="toc-uwagi">Uwagi</a></li>
+</ul></li>
+<li><a href="#wersje-z-pełnymi-komentarzami"
+id="toc-wersje-z-pełnymi-komentarzami">Wersje z pełnymi komentarzami</a>
+<ul>
+<li><a href="#zadanie-1-szachownica-szczegółowo"
+id="toc-zadanie-1-szachownica-szczegółowo">Zadanie 1: Szachownica
+(szczegółowo)</a></li>
+<li><a href="#zadanie-2-usuwanie-linii-z-pliku-szczegółowo"
+id="toc-zadanie-2-usuwanie-linii-z-pliku-szczegółowo">Zadanie 2:
+Usuwanie linii z pliku (szczegółowo)</a></li>
+<li><a href="#zadanie-3-gra-w-kamień-papier-nożyce-szczegółowo"
+id="toc-zadanie-3-gra-w-kamień-papier-nożyce-szczegółowo">Zadanie 3: Gra
+w kamień, papier, nożyce (szczegółowo)</a></li>
+<li><a href="#zadanie-4-konwerter-binarny-na-dziesiętny-szczegółowo"
+id="toc-zadanie-4-konwerter-binarny-na-dziesiętny-szczegółowo">Zadanie
+4: Konwerter binarny na dziesiętny (szczegółowo)</a></li>
+<li><a href="#zadanie-5-szyfrowanie-adresów-ip-szczegółowo"
+id="toc-zadanie-5-szyfrowanie-adresów-ip-szczegółowo">Zadanie 5:
+Szyfrowanie adresów IP (szczegółowo)</a></li>
+<li><a
+href="#zadanie-6-przetwarzanie-csv---sortowanie-według-wieku-szczegółowo"
+id="toc-zadanie-6-przetwarzanie-csv---sortowanie-według-wieku-szczegółowo">Zadanie
+6: Przetwarzanie CSV - sortowanie według wieku (szczegółowo)</a></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="rozwiązania-zadań---bash">Rozwiązania zadań - Bash</h1>
+<h2 id="zadanie-1-szachownica">Zadanie 1: Szachownica</h2>
+<p>Skrypt tworzy katalog szachownica z podfolderami dla każdego pola
+(a1-h8), w każdym tworzy plik z kolorem pola, a dla pól startowych
+dodaje nazwy figur.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> szachownica <span class="kw">&amp;&amp;</span> <span class="bu">cd</span> szachownica  <span class="co"># Tworzy folder i wchodzi do niego</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> col <span class="kw">in</span> <span class="dt">{</span>a<span class="dt">..</span>h<span class="dt">}</span><span class="kw">;</span> <span class="cf">do</span>                    <span class="co"># Pętla po kolumnach a-h</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> row <span class="kw">in</span> <span class="dt">{</span><span class="dv">1</span><span class="dt">..</span><span class="dv">8</span><span class="dt">}</span><span class="kw">;</span> <span class="cf">do</span>                <span class="co"># Pętla po wierszach 1-8</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mkdir</span> <span class="at">-p</span> <span class="st">&quot;</span><span class="va">${col}${row}</span><span class="st">&quot;</span>          <span class="co"># Tworzy folder pola np. &quot;a1&quot;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">col_num</span><span class="op">=</span><span class="va">$(($(</span><span class="bu">printf</span> <span class="st">&quot;%d&quot;</span> <span class="st">&quot;&#39;</span><span class="va">$col</span><span class="st">&quot;</span><span class="va">)</span> <span class="op">-</span> <span class="dv">96</span><span class="va">))</span>  <span class="co"># Konwertuje literę na liczbę (a=1, b=2...)</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">[</span> <span class="va">$((</span> (<span class="va">col_num</span> <span class="op">+</span> <span class="va">row</span>) <span class="op">%</span> <span class="dv">2</span> <span class="va">))</span> <span class="ot">-eq</span> 0 <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="va">color</span><span class="op">=</span><span class="st">&quot;bialy&quot;</span> <span class="kw">||</span> <span class="va">color</span><span class="op">=</span><span class="st">&quot;czarny&quot;</span>  <span class="co"># Parzysta suma = biały</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="st">&quot;</span><span class="va">$row</span><span class="st">&quot;</span> <span class="kw">in</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>            <span class="ss">2</span><span class="kw">)</span> <span class="va">piece</span><span class="op">=</span><span class="st">&quot;WP&quot;</span> <span class="cf">;;</span>             <span class="co"># Wiersz 2: białe piony (White Pawn)</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>            <span class="ss">7</span><span class="kw">)</span> <span class="va">piece</span><span class="op">=</span><span class="st">&quot;BP&quot;</span> <span class="cf">;;</span>             <span class="co"># Wiersz 7: czarne piony (Black Pawn)</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>            <span class="ss">1</span><span class="kw">)</span> <span class="cf">case</span> <span class="va">$col</span> <span class="kw">in</span> <span class="ss">a</span><span class="kw">|</span><span class="ss">h</span><span class="kw">)</span> <span class="va">piece</span><span class="op">=</span><span class="st">&quot;WR&quot;</span><span class="cf">;;</span> <span class="ss">b</span><span class="kw">|</span><span class="ss">g</span><span class="kw">)</span> <span class="va">piece</span><span class="op">=</span><span class="st">&quot;WN&quot;</span><span class="cf">;;</span> <span class="ss">c</span><span class="kw">|</span><span class="ss">f</span><span class="kw">)</span> <span class="va">piece</span><span class="op">=</span><span class="st">&quot;WB&quot;</span><span class="cf">;;</span> <span class="ss">d</span><span class="kw">)</span> <span class="va">piece</span><span class="op">=</span><span class="st">&quot;WQ&quot;</span><span class="cf">;;</span> <span class="ss">e</span><span class="kw">)</span> <span class="va">piece</span><span class="op">=</span><span class="st">&quot;WK&quot;</span><span class="cf">;;</span> <span class="cf">esac</span> <span class="cf">;;</span>  <span class="co"># Białe figury</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>            <span class="ss">8</span><span class="kw">)</span> <span class="cf">case</span> <span class="va">$col</span> <span class="kw">in</span> <span class="ss">a</span><span class="kw">|</span><span class="ss">h</span><span class="kw">)</span> <span class="va">piece</span><span class="op">=</span><span class="st">&quot;BR&quot;</span><span class="cf">;;</span> <span class="ss">b</span><span class="kw">|</span><span class="ss">g</span><span class="kw">)</span> <span class="va">piece</span><span class="op">=</span><span class="st">&quot;BN&quot;</span><span class="cf">;;</span> <span class="ss">c</span><span class="kw">|</span><span class="ss">f</span><span class="kw">)</span> <span class="va">piece</span><span class="op">=</span><span class="st">&quot;BB&quot;</span><span class="cf">;;</span> <span class="ss">d</span><span class="kw">)</span> <span class="va">piece</span><span class="op">=</span><span class="st">&quot;BQ&quot;</span><span class="cf">;;</span> <span class="ss">e</span><span class="kw">)</span> <span class="va">piece</span><span class="op">=</span><span class="st">&quot;BK&quot;</span><span class="cf">;;</span> <span class="cf">esac</span> <span class="cf">;;</span>  <span class="co"># Czarne figury</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>            <span class="pp">*</span><span class="kw">)</span> <span class="va">piece</span><span class="op">=</span><span class="st">&quot;&quot;</span> <span class="cf">;;</span>               <span class="co"># Puste pola (wiersze 3-6)</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">esac</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$piece</span><span class="st">&quot;</span> <span class="op">&gt;</span> <span class="st">&quot;</span><span class="va">${col}${row}</span><span class="st">/</span><span class="va">$color</span><span class="st">&quot;</span>  <span class="co"># Zapisuje figurę do pliku o nazwie koloru</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">done</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
+<hr />
+<h2 id="zadanie-2-usuwanie-linii-z-pliku">Zadanie 2: Usuwanie linii z
+pliku</h2>
+<p>Skrypt przyjmuje nazwę pliku i frazę, a następnie usuwa wszystkie
+linie zawierające tę frazę.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># $1 = nazwa pliku, $2 = fraza do usunięcia</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># grep -v = wypisz linie NIE zawierające frazy</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-v</span> <span class="st">&quot;</span><span class="va">$2</span><span class="st">&quot;</span> <span class="st">&quot;</span><span class="va">$1</span><span class="st">&quot;</span> <span class="op">&gt;</span> tmp <span class="kw">&amp;&amp;</span> <span class="fu">mv</span> tmp <span class="st">&quot;</span><span class="va">$1</span><span class="st">&quot;</span></span></code></pre></div>
+<hr />
+<h2 id="zadanie-3-gra-w-kamień-papier-nożyce">Zadanie 3: Gra w kamień,
+papier, nożyce</h2>
+<p>Skrypt symuluje grę w kamień, papier, nożyce z komputerem.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="va">choices</span><span class="op">=</span><span class="va">(</span>K P N<span class="va">)</span>                          <span class="co"># Tablica możliwych wyborów</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">read</span> <span class="at">-p</span> <span class="st">&quot;Wybierz K/P/N: &quot;</span> <span class="va">p</span>              <span class="co"># Wczytaj wybór gracza</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="va">p</span><span class="op">=</span><span class="va">$(</span><span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$p</span><span class="st">&quot;</span> <span class="kw">|</span> <span class="fu">tr</span> a-z A-Z<span class="va">)</span>              <span class="co"># Zamień na wielkie litery</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="va">c</span><span class="op">=</span><span class="va">${choices</span><span class="op">[</span><span class="va">$((RANDOM</span> <span class="op">%</span> <span class="dv">3</span><span class="va">))</span><span class="op">]</span><span class="va">}</span>            <span class="co"># Losuj wybór komputera (indeks 0-2)</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;Ty: </span><span class="va">$p</span><span class="st">, Komputer: </span><span class="va">$c</span><span class="st">&quot;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="st">&quot;</span><span class="va">$p</span><span class="st">&quot;</span> <span class="ot">==</span> <span class="st">&quot;</span><span class="va">$c</span><span class="st">&quot;</span> <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="bu">echo</span> <span class="st">&quot;REMIS!&quot;</span> <span class="kw">&amp;&amp;</span> <span class="bu">exit</span>                         <span class="co"># Remis gdy równe</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="kw">[[</span> <span class="st">&quot;</span><span class="va">$p$c</span><span class="st">&quot;</span> <span class="ot">=~</span> <span class="pp">^</span><span class="op">(</span><span class="ss">KN</span><span class="pp">|</span><span class="ss">PK</span><span class="pp">|</span><span class="ss">NP</span><span class="op">)$</span> <span class="kw">]]</span> <span class="kw">&amp;&amp;</span> <span class="bu">echo</span> <span class="st">&quot;WYGRANA!&quot;</span> <span class="kw">||</span> <span class="bu">echo</span> <span class="st">&quot;PRZEGRANA!&quot;</span>  <span class="co"># KN/PK/NP = wygrana</span></span></code></pre></div>
+<hr />
+<h2 id="zadanie-4-konwerter-binarny-na-dziesiętny">Zadanie 4: Konwerter
+binarny na dziesiętny</h2>
+<p>Skrypt konwertuje liczby binarne na system dziesiętny.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># $@ = wszystkie argumenty przekazane do skryptu</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> b <span class="kw">in</span> <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$b</span><span class="st"> (bin) = </span><span class="va">$((</span><span class="dt">2#</span><span class="va">$b))</span><span class="st"> (dec)&quot;</span>    <span class="co"># 2#$b = konwersja z systemu dwójkowego</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div>
+<hr />
+<h2 id="zadanie-5-szyfrowanie-adresów-ip">Zadanie 5: Szyfrowanie adresów
+IP</h2>
+<p>Skrypt zaszyfruje wszystkie adresy IPv4 w pliku test.txt używając
+szyfru zamiennego (ROT5 dla cyfr).</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># tr zamienia każdą cyfrę na cyfrę przesuniętą o 5 (0-&gt;5, 1-&gt;6, ..., 5-&gt;0, ...)</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tr</span> <span class="st">&#39;0123456789&#39;</span> <span class="st">&#39;5678901234&#39;</span> <span class="op">&lt;</span> test.txt <span class="op">&gt;</span> tmp <span class="kw">&amp;&amp;</span> <span class="fu">mv</span> tmp test.txt</span></code></pre></div>
+<hr />
+<h2 id="zadanie-6-przetwarzanie-csv---sortowanie-według-wieku">Zadanie
+6: Przetwarzanie CSV - sortowanie według wieku</h2>
+<p>Skrypt przetwarza plik CSV, sortuje według wieku i tworzy pliki z 10
+najmłodszymi i najstarszymi osobami.</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="va">header</span><span class="op">=</span><span class="va">$(</span><span class="fu">head</span> <span class="at">-1</span> dane.csv<span class="va">)</span>               <span class="co"># Pobierz nagłówek (pierwsza linia)</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># tail -n +2 = pomiń nagłówek, awk dodaje wiek na początek, sort sortuje numerycznie</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="va">sorted</span><span class="op">=</span><span class="va">$(</span><span class="fu">tail</span> <span class="at">-n</span> +2 dane.csv <span class="kw">|</span> <span class="fu">awk</span> <span class="at">-F</span><span class="st">&#39;;&#39;</span> <span class="st">&#39;{print 2026-$2&quot;;&quot;$0}&#39;</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-t</span><span class="st">&#39;;&#39;</span> <span class="at">-k1n</span><span class="va">)</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$header</span><span class="st">&quot;</span> <span class="op">&gt;</span> new.csv                 <span class="co"># Nagłówek do pliku młodszych</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$sorted</span><span class="st">&quot;</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-10</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span><span class="st">&#39;;&#39;</span> <span class="at">-f2-</span> <span class="op">&gt;&gt;</span> new.csv  <span class="co"># 10 najmłodszych (bez kolumny wieku)</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$header</span><span class="st">&quot;</span> <span class="op">&gt;</span> old.csv                 <span class="co"># Nagłówek do pliku starszych</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$sorted</span><span class="st">&quot;</span> <span class="kw">|</span> <span class="fu">tail</span> <span class="at">-10</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span><span class="st">&#39;;&#39;</span> <span class="at">-f2-</span> <span class="op">&gt;&gt;</span> old.csv  <span class="co"># 10 najstarszych</span></span></code></pre></div>
+<hr />
+<h2 id="uwagi">Uwagi</h2>
+<ul>
+<li>Skrypty są maksymalnie uproszczone - bez walidacji danych
+wejściowych</li>
+<li>Aby uruchomić skrypt, zapisz go do pliku, nadaj uprawnienia
+wykonywania (<code>chmod +x skrypt.sh</code>) i uruchom
+(<code>./skrypt.sh</code>)</li>
+</ul>
+<hr />
+<h1 id="wersje-z-pełnymi-komentarzami">Wersje z pełnymi
+komentarzami</h1>
+<p>Poniżej te same zadania, ale z dokładnymi wyjaśnieniami każdej linii
+kodu.</p>
+<h2 id="zadanie-1-szachownica-szczegółowo">Zadanie 1: Szachownica
+(szczegółowo)</h2>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ZADANIE: Stwórz strukturę folderów szachownicy</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Tworzy główny katalog &quot;szachownica&quot; (-p = nie zgłasza błędu jeśli istnieje)</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># &amp;&amp; oznacza: wykonaj następne polecenie tylko jeśli poprzednie się powiodło</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> szachownica <span class="kw">&amp;&amp;</span> <span class="bu">cd</span> szachownica</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Zewnętrzna pętla: iteruje po kolumnach od &#39;a&#39; do &#39;h&#39;</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co"># {a..h} to rozwinięcie bash - generuje: a b c d e f g h</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> col <span class="kw">in</span> <span class="dt">{</span>a<span class="dt">..</span>h<span class="dt">}</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Wewnętrzna pętla: iteruje po wierszach od 1 do 8</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> row <span class="kw">in</span> <span class="dt">{</span><span class="dv">1</span><span class="dt">..</span><span class="dv">8</span><span class="dt">}</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Tworzy folder dla pola, np. &quot;a1&quot;, &quot;b2&quot;, itd.</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mkdir</span> <span class="at">-p</span> <span class="st">&quot;</span><span class="va">${col}${row}</span><span class="st">&quot;</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>        <span class="co"># KONWERSJA LITERY NA LICZBĘ:</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>        <span class="co"># printf &quot;%d&quot; &quot;&#39;a&quot; zwraca kod ASCII litery &#39;a&#39; (97)</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Odejmujemy 96, więc: a=1, b=2, c=3, ..., h=8</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>        <span class="va">col_num</span><span class="op">=</span><span class="va">$(($(</span><span class="bu">printf</span> <span class="st">&quot;%d&quot;</span> <span class="st">&quot;&#39;</span><span class="va">$col</span><span class="st">&quot;</span><span class="va">)</span> <span class="op">-</span> <span class="dv">96</span><span class="va">))</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>        <span class="co"># OBLICZANIE KOLORU POLA:</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Na szachownicy pole jest BIAŁE gdy suma kolumny i wiersza jest PARZYSTA</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Przykład: a1 -&gt; 1+1=2 (parzyste) -&gt; ale a1 jest CZARNE!</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Więc: parzysta suma = biały, nieparzysta = czarny</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>        <span class="co"># [ warunek ] &amp;&amp; akcja1 || akcja2  = if-then-else w jednej linii</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>        <span class="bu">[</span> <span class="va">$((</span> (<span class="va">col_num</span> <span class="op">+</span> <span class="va">row</span>) <span class="op">%</span> <span class="dv">2</span> <span class="va">))</span> <span class="ot">-eq</span> 0 <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="va">color</span><span class="op">=</span><span class="st">&quot;bialy&quot;</span> <span class="kw">||</span> <span class="va">color</span><span class="op">=</span><span class="st">&quot;czarny&quot;</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>        <span class="co"># PRZYPISANIE FIGURY na podstawie wiersza:</span></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>        <span class="co"># case to odpowiednik switch z innych języków</span></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>        <span class="cf">case</span> <span class="st">&quot;</span><span class="va">$row</span><span class="st">&quot;</span> <span class="kw">in</span></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>            <span class="ss">2</span><span class="kw">)</span> <span class="va">piece</span><span class="op">=</span><span class="st">&quot;WP&quot;</span> <span class="cf">;;</span>   <span class="co"># Wiersz 2: białe piony (W=White, P=Pawn)</span></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>            <span class="ss">7</span><span class="kw">)</span> <span class="va">piece</span><span class="op">=</span><span class="st">&quot;BP&quot;</span> <span class="cf">;;</span>   <span class="co"># Wiersz 7: czarne piony (B=Black, P=Pawn)</span></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Wiersz 1: białe figury - zagnieżdżony case dla kolumn</span></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>            <span class="ss">1</span><span class="kw">)</span> <span class="cf">case</span> <span class="va">$col</span> <span class="kw">in</span> </span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>                <span class="ss">a</span><span class="kw">|</span><span class="ss">h</span><span class="kw">)</span> <span class="va">piece</span><span class="op">=</span><span class="st">&quot;WR&quot;</span><span class="cf">;;</span>  <span class="co"># a1, h1: wieże (R=Rook)</span></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>                <span class="ss">b</span><span class="kw">|</span><span class="ss">g</span><span class="kw">)</span> <span class="va">piece</span><span class="op">=</span><span class="st">&quot;WN&quot;</span><span class="cf">;;</span>  <span class="co"># b1, g1: skoczki (N=Knight)</span></span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>                <span class="ss">c</span><span class="kw">|</span><span class="ss">f</span><span class="kw">)</span> <span class="va">piece</span><span class="op">=</span><span class="st">&quot;WB&quot;</span><span class="cf">;;</span>  <span class="co"># c1, f1: gońce (B=Bishop)</span></span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>                <span class="ss">d</span><span class="kw">)</span> <span class="va">piece</span><span class="op">=</span><span class="st">&quot;WQ&quot;</span><span class="cf">;;</span>    <span class="co"># d1: hetman (Q=Queen)</span></span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>                <span class="ss">e</span><span class="kw">)</span> <span class="va">piece</span><span class="op">=</span><span class="st">&quot;WK&quot;</span><span class="cf">;;</span>    <span class="co"># e1: król (K=King)</span></span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>               <span class="cf">esac</span> <span class="cf">;;</span></span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Wiersz 8: czarne figury (analogicznie)</span></span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>            <span class="ss">8</span><span class="kw">)</span> <span class="cf">case</span> <span class="va">$col</span> <span class="kw">in</span> </span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>                <span class="ss">a</span><span class="kw">|</span><span class="ss">h</span><span class="kw">)</span> <span class="va">piece</span><span class="op">=</span><span class="st">&quot;BR&quot;</span><span class="cf">;;</span>  <span class="co"># Czarne wieże</span></span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>                <span class="ss">b</span><span class="kw">|</span><span class="ss">g</span><span class="kw">)</span> <span class="va">piece</span><span class="op">=</span><span class="st">&quot;BN&quot;</span><span class="cf">;;</span>  <span class="co"># Czarne skoczki</span></span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>                <span class="ss">c</span><span class="kw">|</span><span class="ss">f</span><span class="kw">)</span> <span class="va">piece</span><span class="op">=</span><span class="st">&quot;BB&quot;</span><span class="cf">;;</span>  <span class="co"># Czarni gońce</span></span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>                <span class="ss">d</span><span class="kw">)</span> <span class="va">piece</span><span class="op">=</span><span class="st">&quot;BQ&quot;</span><span class="cf">;;</span>    <span class="co"># Czarny hetman</span></span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>                <span class="ss">e</span><span class="kw">)</span> <span class="va">piece</span><span class="op">=</span><span class="st">&quot;BK&quot;</span><span class="cf">;;</span>    <span class="co"># Czarny król</span></span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>               <span class="cf">esac</span> <span class="cf">;;</span></span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Wiersze 3-6: puste pola</span></span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a>            <span class="pp">*</span><span class="kw">)</span> <span class="va">piece</span><span class="op">=</span><span class="st">&quot;&quot;</span> <span class="cf">;;</span></span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a>        <span class="cf">esac</span></span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Zapisuje figurę (lub pusty string) do pliku</span></span>
+<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Nazwa pliku = kolor pola (bialy lub czarny)</span></span>
+<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$piece</span><span class="st">&quot;</span> <span class="op">&gt;</span> <span class="st">&quot;</span><span class="va">${col}${row}</span><span class="st">/</span><span class="va">$color</span><span class="st">&quot;</span></span>
+<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a>    <span class="cf">done</span>  <span class="co"># Koniec pętli wierszy</span></span>
+<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span>      <span class="co"># Koniec pętli kolumn</span></span></code></pre></div>
+<hr />
+<h2 id="zadanie-2-usuwanie-linii-z-pliku-szczegółowo">Zadanie 2:
+Usuwanie linii z pliku (szczegółowo)</h2>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ZADANIE: Usuń linie zawierające podaną frazę</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Użycie: ./skrypt.sh nazwa_pliku fraza</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ZMIENNE SPECJALNE:</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># $1 = pierwszy argument (nazwa pliku)</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># $2 = drugi argument (fraza do usunięcia)</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co"># GREP z flagą -v (--invert-match):</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalnie grep wypisuje linie PASUJĄCE do wzorca</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Z flagą -v wypisuje linie NIE pasujące do wzorca</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Przykład: plik.txt zawiera:</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co">#   jabłko</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="co">#   gruszka</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co">#   jabłko czerwone</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="co"># grep -v &quot;jabłko&quot; plik.txt  wypisze tylko:</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="co">#   gruszka</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="co"># PRZEKIEROWANIA:</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="co"># &gt; tmp     = zapisz wynik do pliku &quot;tmp&quot; (nadpisz jeśli istnieje)</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="co"># &amp;&amp;        = wykonaj następne polecenie tylko jeśli poprzednie się powiodło</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="co"># mv tmp &quot;$1&quot; = przenieś (zmień nazwę) tmp na oryginalną nazwę pliku</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-v</span> <span class="st">&quot;</span><span class="va">$2</span><span class="st">&quot;</span> <span class="st">&quot;</span><span class="va">$1</span><span class="st">&quot;</span> <span class="op">&gt;</span> tmp <span class="kw">&amp;&amp;</span> <span class="fu">mv</span> tmp <span class="st">&quot;</span><span class="va">$1</span><span class="st">&quot;</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="co"># ALTERNATYWNIE można użyć sed:</span></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="co"># sed -i &quot;/$2/d&quot; &quot;$1&quot;</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="co"># -i = edytuj plik w miejscu</span></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="co"># /$2/d = usuń linie pasujące do wzorca $2</span></span></code></pre></div>
+<hr />
+<h2 id="zadanie-3-gra-w-kamień-papier-nożyce-szczegółowo">Zadanie 3: Gra
+w kamień, papier, nożyce (szczegółowo)</h2>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ZADANIE: Gra kamień, papier, nożyce</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># TABLICA w bashu:</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Indeksy: 0=K, 1=P, 2=N</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="va">choices</span><span class="op">=</span><span class="va">(</span>K P N<span class="va">)</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co"># READ wczytuje dane od użytkownika:</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co"># -p &quot;tekst&quot; = wyświetl prompt przed wczytaniem</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Wartość zapisywana do zmiennej p</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="bu">read</span> <span class="at">-p</span> <span class="st">&quot;Wybierz K/P/N: &quot;</span> <span class="va">p</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co"># ZAMIANA NA WIELKIE LITERY:</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co"># echo &quot;$p&quot; wypisuje wartość zmiennej</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co"># | (pipe) przekazuje wynik do następnego polecenia</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="co"># tr a-z A-Z zamienia małe litery na wielkie</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co"># $(...) przechwytuje wynik polecenia do zmiennej</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="va">p</span><span class="op">=</span><span class="va">$(</span><span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$p</span><span class="st">&quot;</span> <span class="kw">|</span> <span class="fu">tr</span> a-z A-Z<span class="va">)</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co"># LOSOWANIE WYBORU KOMPUTERA:</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="co"># $RANDOM = wbudowana zmienna bash, losowa liczba 0-32767</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="co"># % 3 = reszta z dzielenia przez 3 (wynik: 0, 1 lub 2)</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="co"># ${choices[indeks]} = element tablicy o danym indeksie</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="va">c</span><span class="op">=</span><span class="va">${choices</span><span class="op">[</span><span class="va">$((RANDOM</span> <span class="op">%</span> <span class="dv">3</span><span class="va">))</span><span class="op">]</span><span class="va">}</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Wyświetl wybory obu graczy</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;Ty: </span><span class="va">$p</span><span class="st">, Komputer: </span><span class="va">$c</span><span class="st">&quot;</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="co"># SPRAWDZENIE REMISU:</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="co"># [ &quot;$p&quot; == &quot;$c&quot; ] = porównanie stringów</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="co"># &amp;&amp; = jeśli prawda, wykonaj następne</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="co"># exit = zakończ skrypt</span></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="bu">[</span> <span class="st">&quot;</span><span class="va">$p</span><span class="st">&quot;</span> <span class="ot">==</span> <span class="st">&quot;</span><span class="va">$c</span><span class="st">&quot;</span> <span class="bu">]</span> <span class="kw">&amp;&amp;</span> <span class="bu">echo</span> <span class="st">&quot;REMIS!&quot;</span> <span class="kw">&amp;&amp;</span> <span class="bu">exit</span></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="co"># SPRAWDZENIE WYGRANEJ:</span></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a><span class="co"># [[ ... =~ wzorzec ]] = dopasowanie do wyrażenia regularnego</span></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a><span class="co"># &quot;$p$c&quot; łączy oba wybory, np. &quot;KN&quot; (gracz K, komputer N)</span></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a><span class="co"># ^(KN|PK|NP)$ = wzorzec wygrywających kombinacji:</span></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="co">#   KN = Kamień bije Nożyce</span></span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a><span class="co">#   PK = Papier bije Kamień  </span></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a><span class="co">#   NP = Nożyce biją Papier</span></span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="co"># ^ = początek stringa, $ = koniec stringa</span></span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a><span class="co"># | = lub (alternatywa)</span></span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a><span class="kw">[[</span> <span class="st">&quot;</span><span class="va">$p$c</span><span class="st">&quot;</span> <span class="ot">=~</span> <span class="pp">^</span><span class="op">(</span><span class="ss">KN</span><span class="pp">|</span><span class="ss">PK</span><span class="pp">|</span><span class="ss">NP</span><span class="op">)$</span> <span class="kw">]]</span> <span class="kw">&amp;&amp;</span> <span class="bu">echo</span> <span class="st">&quot;WYGRANA!&quot;</span> <span class="kw">||</span> <span class="bu">echo</span> <span class="st">&quot;PRZEGRANA!&quot;</span></span></code></pre></div>
+<hr />
+<h2 id="zadanie-4-konwerter-binarny-na-dziesiętny-szczegółowo">Zadanie
+4: Konwerter binarny na dziesiętny (szczegółowo)</h2>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ZADANIE: Konwertuj liczby binarne na dziesiętne</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Użycie: ./skrypt.sh 1010 1111 10000</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ZMIENNE SPECJALNE ARGUMENTÓW:</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># $@ = wszystkie argumenty jako osobne słowa</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># $* = wszystkie argumenty jako jeden string</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co"># $# = liczba argumentów</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co"># $0 = nazwa skryptu</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co"># $1, $2, ... = konkretne argumenty</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co"># PĘTLA FOR po wszystkich argumentach:</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co"># &quot;$@&quot; w cudzysłowach zachowuje argumenty ze spacjami</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> b <span class="kw">in</span> <span class="st">&quot;</span><span class="va">$@</span><span class="st">&quot;</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># KONWERSJA SYSTEMÓW LICZBOWYCH W BASH:</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># $((wyrażenie)) = obliczenia arytmetyczne</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># BAZA#LICZBA = konwersja z systemu o podstawie BAZA</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">#</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Przykłady:</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># $((2#1010))  = 10  (binarny -&gt; dziesiętny)</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># $((16#FF))   = 255 (szesnastkowy -&gt; dziesiętny)</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>    <span class="co"># $((8#77))    = 63  (ósemkowy -&gt; dziesiętny)</span></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>    <span class="co">#</span></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Jak działa 2#1010:</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 1*2³ + 0*2² + 1*2¹ + 0*2⁰ = 8 + 0 + 2 + 0 = 10</span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$b</span><span class="st"> (bin) = </span><span class="va">$((</span><span class="dt">2#</span><span class="va">$b))</span><span class="st"> (dec)&quot;</span></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a><span class="co"># PRZYKŁADOWE WYWOŁANIE:</span></span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a><span class="co"># ./skrypt.sh 1010 1111 10000</span></span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Wynik:</span></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a><span class="co"># 1010 (bin) = 10 (dec)</span></span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a><span class="co"># 1111 (bin) = 15 (dec)</span></span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a><span class="co"># 10000 (bin) = 16 (dec)</span></span></code></pre></div>
+<hr />
+<h2 id="zadanie-5-szyfrowanie-adresów-ip-szczegółowo">Zadanie 5:
+Szyfrowanie adresów IP (szczegółowo)</h2>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ZADANIE: Zaszyfruj cyfry w pliku szyfrem ROT5</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># SZYFR ROT5 DLA CYFR:</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Każda cyfra jest zamieniana na cyfrę przesuniętą o 5 pozycji</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 0 -&gt; 5</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 -&gt; 6</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 -&gt; 7</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 3 -&gt; 8</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 4 -&gt; 9</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 5 -&gt; 0  (zawijamy do początku)</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 6 -&gt; 1</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 7 -&gt; 2</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 8 -&gt; 3</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 9 -&gt; 4</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="co"># POLECENIE TR (translate):</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="co"># tr &#39;zestaw1&#39; &#39;zestaw2&#39; - zamienia znaki z zestawu1 na odpowiadające z zestawu2</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Znaki są mapowane 1:1 na podstawie pozycji:</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="co">#   0123456789</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="co">#   5678901234</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Czyli: 0-&gt;5, 1-&gt;6, 2-&gt;7, itd.</span></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a><span class="co"># PRZEKIEROWANIA:</span></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="co"># &lt; test.txt  = wczytaj dane z pliku (stdin)</span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="co"># &gt; tmp       = zapisz wynik do pliku tmp</span></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a><span class="co"># &amp;&amp; mv ...   = jeśli sukces, przenieś tmp na miejsce oryginału</span></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a><span class="fu">tr</span> <span class="st">&#39;0123456789&#39;</span> <span class="st">&#39;5678901234&#39;</span> <span class="op">&lt;</span> test.txt <span class="op">&gt;</span> tmp <span class="kw">&amp;&amp;</span> <span class="fu">mv</span> tmp test.txt</span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a><span class="co"># PRZYKŁAD:</span></span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Przed: 192.168.1.1</span></span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Po:    647.613.6.6</span></span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Szyfr jest symetryczny - zastosowany dwukrotnie przywraca oryginał!</span></span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a><span class="co"># ROT5(ROT5(x)) = x</span></span></code></pre></div>
+<hr />
+<h2
+id="zadanie-6-przetwarzanie-csv---sortowanie-według-wieku-szczegółowo">Zadanie
+6: Przetwarzanie CSV - sortowanie według wieku (szczegółowo)</h2>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ZADANIE: Sortuj CSV według wieku, utwórz pliki</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># z 10 najmłodszymi i 10 najstarszymi osobami</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Format pliku dane.csv:</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Imię_I_nazwisko;Rok_urodzenia;Miesiąc_urodzenia</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Jan Kowalski;1990;5</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Anna Nowak;1985;12</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co"># ...</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co"># KROK 1: Pobierz nagłówek (pierwszą linię)</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="co"># head -1 = wyświetl tylko pierwszą linię</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="co"># head -n 1 = to samo (bardziej czytelne)</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="va">header</span><span class="op">=</span><span class="va">$(</span><span class="fu">head</span> <span class="at">-1</span> dane.csv<span class="va">)</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="co"># KROK 2: Przetwórz dane (bez nagłówka) i posortuj</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="co"># tail -n +2     = wyświetl od 2. linii do końca (pomiń nagłówek)</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="co">#                  +2 oznacza &quot;zaczynając od linii 2&quot;</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="co"># | (pipe)       = przekaż wynik do następnego polecenia</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="co"># awk -F&#39;;&#39;      = użyj średnika jako separatora pól</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="co">#   &#39;{print 2026-$2&quot;;&quot;$0}&#39;</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="co">#   $2 = drugie pole (rok urodzenia)</span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a><span class="co">#   $0 = cała linia</span></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a><span class="co">#   2026-$2 = oblicz wiek</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a><span class="co">#   Wynik: &quot;wiek;oryginalna_linia&quot;</span></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a><span class="co">#   Np: &quot;36;Jan Kowalski;1990;5&quot;</span></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a><span class="co"># sort -t&#39;;&#39; -k1n</span></span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a><span class="co">#   -t&#39;;&#39;  = separator pól to średnik</span></span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a><span class="co">#   -k1    = sortuj według pierwszego pola (wiek)</span></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a><span class="co">#   n      = sortuj numerycznie (nie alfabetycznie!)</span></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a><span class="co">#            Bez &#39;n&#39;: 9 &gt; 10 (bo &quot;9&quot; &gt; &quot;1&quot; alfabetycznie)</span></span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a><span class="co">#            Z &#39;n&#39;:   9 &lt; 10 (poprawne porównanie liczbowe)</span></span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a><span class="va">sorted</span><span class="op">=</span><span class="va">$(</span><span class="fu">tail</span> <span class="at">-n</span> +2 dane.csv <span class="kw">|</span> <span class="fu">awk</span> <span class="at">-F</span><span class="st">&#39;;&#39;</span> <span class="st">&#39;{print 2026-$2&quot;;&quot;$0}&#39;</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-t</span><span class="st">&#39;;&#39;</span> <span class="at">-k1n</span><span class="va">)</span></span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a><span class="co"># KROK 3: Utwórz plik z 10 najmłodszymi</span></span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a><span class="co"># &gt; new.csv = utwórz/nadpisz plik, zapisz nagłówek</span></span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$header</span><span class="st">&quot;</span> <span class="op">&gt;</span> new.csv</span>
+<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a><span class="co"># head -10       = weź pierwsze 10 linii (najmłodsi mają najmniejszy wiek)</span></span>
+<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a><span class="co"># cut -d&#39;;&#39; -f2- = usuń pierwszą kolumnę (wiek), zostaw resztę</span></span>
+<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a><span class="co">#   -d&#39;;&#39;  = separator to średnik</span></span>
+<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a><span class="co">#   -f2-   = pola od 2. do końca (pomijamy pole 1 czyli wiek)</span></span>
+<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a><span class="co"># &gt;&gt; new.csv = dopisz do pliku (nie nadpisuj!)</span></span>
+<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$sorted</span><span class="st">&quot;</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-10</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span><span class="st">&#39;;&#39;</span> <span class="at">-f2-</span> <span class="op">&gt;&gt;</span> new.csv</span>
+<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a><span class="co"># KROK 4: Utwórz plik z 10 najstarszymi</span></span>
+<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$header</span><span class="st">&quot;</span> <span class="op">&gt;</span> old.csv</span>
+<span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-56"><a href="#cb12-56" aria-hidden="true" tabindex="-1"></a><span class="co"># tail -10 = weź ostatnie 10 linii (najstarsi mają największy wiek)</span></span>
+<span id="cb12-57"><a href="#cb12-57" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">&quot;</span><span class="va">$sorted</span><span class="st">&quot;</span> <span class="kw">|</span> <span class="fu">tail</span> <span class="at">-10</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span><span class="st">&#39;;&#39;</span> <span class="at">-f2-</span> <span class="op">&gt;&gt;</span> old.csv</span>
+<span id="cb12-58"><a href="#cb12-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-59"><a href="#cb12-59" aria-hidden="true" tabindex="-1"></a><span class="co"># PRZYKŁAD DZIAŁANIA:</span></span>
+<span id="cb12-60"><a href="#cb12-60" aria-hidden="true" tabindex="-1"></a><span class="co"># </span></span>
+<span id="cb12-61"><a href="#cb12-61" aria-hidden="true" tabindex="-1"></a><span class="co"># dane.csv:</span></span>
+<span id="cb12-62"><a href="#cb12-62" aria-hidden="true" tabindex="-1"></a><span class="co"># Imię;Rok;Miesiąc</span></span>
+<span id="cb12-63"><a href="#cb12-63" aria-hidden="true" tabindex="-1"></a><span class="co"># Jan;1990;5      -&gt; wiek 36</span></span>
+<span id="cb12-64"><a href="#cb12-64" aria-hidden="true" tabindex="-1"></a><span class="co"># Anna;2000;12    -&gt; wiek 26</span></span>
+<span id="cb12-65"><a href="#cb12-65" aria-hidden="true" tabindex="-1"></a><span class="co"># Piotr;1950;1    -&gt; wiek 76</span></span>
+<span id="cb12-66"><a href="#cb12-66" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb12-67"><a href="#cb12-67" aria-hidden="true" tabindex="-1"></a><span class="co"># Po przetworzeniu awk:</span></span>
+<span id="cb12-68"><a href="#cb12-68" aria-hidden="true" tabindex="-1"></a><span class="co"># 36;Jan;1990;5</span></span>
+<span id="cb12-69"><a href="#cb12-69" aria-hidden="true" tabindex="-1"></a><span class="co"># 26;Anna;2000;12</span></span>
+<span id="cb12-70"><a href="#cb12-70" aria-hidden="true" tabindex="-1"></a><span class="co"># 76;Piotr;1950;1</span></span>
+<span id="cb12-71"><a href="#cb12-71" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb12-72"><a href="#cb12-72" aria-hidden="true" tabindex="-1"></a><span class="co"># Po sortowaniu (od najmłodszego):</span></span>
+<span id="cb12-73"><a href="#cb12-73" aria-hidden="true" tabindex="-1"></a><span class="co"># 26;Anna;2000;12</span></span>
+<span id="cb12-74"><a href="#cb12-74" aria-hidden="true" tabindex="-1"></a><span class="co"># 36;Jan;1990;5</span></span>
+<span id="cb12-75"><a href="#cb12-75" aria-hidden="true" tabindex="-1"></a><span class="co"># 76;Piotr;1950;1</span></span>
+<span id="cb12-76"><a href="#cb12-76" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb12-77"><a href="#cb12-77" aria-hidden="true" tabindex="-1"></a><span class="co"># new.csv (najmłodsi, head):</span></span>
+<span id="cb12-78"><a href="#cb12-78" aria-hidden="true" tabindex="-1"></a><span class="co"># Imię;Rok;Miesiąc</span></span>
+<span id="cb12-79"><a href="#cb12-79" aria-hidden="true" tabindex="-1"></a><span class="co"># Anna;2000;12</span></span>
+<span id="cb12-80"><a href="#cb12-80" aria-hidden="true" tabindex="-1"></a><span class="co"># Jan;1990;5</span></span>
+<span id="cb12-81"><a href="#cb12-81" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb12-82"><a href="#cb12-82" aria-hidden="true" tabindex="-1"></a><span class="co"># old.csv (najstarsi, tail):</span></span>
+<span id="cb12-83"><a href="#cb12-83" aria-hidden="true" tabindex="-1"></a><span class="co"># Imię;Rok;Miesiąc</span></span>
+<span id="cb12-84"><a href="#cb12-84" aria-hidden="true" tabindex="-1"></a><span class="co"># Piotr;1950;1</span></span></code></pre></div>
+</body>
+</html>

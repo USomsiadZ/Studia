@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pl" xml:lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Przykłady kodu - Bash</title>
+  <link rel="stylesheet" href="../gotowe/dark-style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+  <style>
+    body { max-width: 1000px; }
+    h1 { font-size: 2rem; margin-bottom: 1.5rem; }
+    h2 { font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; border-bottom: 2px solid var(--border); padding-bottom: 0.5rem; }
+    h3 { font-size: 1.2rem; margin-top: 1.5rem; margin-bottom: 0.7rem; color: var(--link); }
+    pre { margin: 1rem 0; border-radius: 8px; overflow-x: auto; }
+    pre code { display: block; padding: 1rem; }
+    .note { background-color: var(--bg-secondary); border-left: 4px solid var(--accent); padding: 1rem; margin: 1rem 0; border-radius: 4px; }
+    
+    /* Dodatkowe style dla highlight.js */
+    .hljs {
+      background: #1e1e1e !important;
+      color: #d4d4d4 !important;
+    }
+    .hljs-comment { color: #6a9955 !important; }
+    .hljs-string { color: #ce9178 !important; }
+    .hljs-number { color: #b5cea8 !important; }
+    .hljs-keyword { color: #569cd6 !important; }
+    .hljs-variable { color: #9cdcfe !important; }
+    .hljs-built_in { color: #4ec9b0 !important; }
+    .hljs-operator { color: #d4d4d4 !important; }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/bash.min.js"></script>
+  <script>hljs.highlightAll();</script>
+</head>
+<body>
+
+<h1>Gotowe wzorce kodu - Bash</h1>
+
+<p>Przykłady gotowe do skopiowania i użycia na egzaminie.</p>
+
+<h2>1. Walidacja argumentów</h2>
+
+<h3>Sprawdzenie liczby argumentów</h3>
+<pre><code class="language-bash">#!/bin/bash
+
+# Sprawdź czy podano dokładnie 2 argumenty
+if [ $# -ne 2 ]; then
+    echo "Błąd: Wymagane 2 argumenty"
+    echo "Użycie: $0 &lt;argument1&gt; &lt;argument2&gt;"
+    exit 1
+fi
+
+# Użycie argumentów
+plik=$1
+fraza=$2
+echo "Plik: $plik, Fraza: $fraza"
+</code></pre>
+
+<h3>Sprawdzenie minimalnej liczby argumentów</h3>
+<pre><code class="language-bash">#!/bin/bash
+
+if [ $# -lt 1 ]; then
+    echo "Błąd: Potrzebny co najmniej 1 argument"
+    exit 1
+fi
+</code></pre>
+
+<h2>2. Sprawdzanie plików</h2>
+
+<h3>Sprawdź czy plik istnieje</h3>
+<pre><code class="language-bash">#!/bin/bash
+
+plik=$1
+
+if [ ! -f "$plik" ]; then
+    echo "Błąd: Plik '$plik' nie istnieje!"
+    exit 1
+fi
+
+echo "Plik istnieje, przetwarzam..."
+</code></pre>
+
+<h3>Sprawdź czy katalog istnieje</h3>
+<pre><code class="language-bash">#!/bin/bash
+
+katalog=$1
+
+if [ ! -d "$katalog" ]; then
+    echo "Katalog nie istnieje, tworzę..."
+    mkdir -p "$katalog"
+fi
+
+cd "$katalog"
+</code></pre>
+
+<h3>Sprawdź uprawnienia</h3>
+<pre><code class="language-bash">#!/bin/bash
+
+plik=$1
+
+if [ ! -r "$plik" ]; then
+    echo "Błąd: Brak uprawnień do odczytu"
+    exit 1
+fi
+
+if [ ! -w "$plik" ]; then
+    echo "Błąd: Brak uprawnień do zapisu"
+    exit 1
+fi
+</code></pre>
+
+<h2>3. Pętle</h2>
+
+<h3>Pętla po wszystkich argumentach</h3>
+<pre><code class="language-bash">#!/bin/bash
+
+# Iteracja po wszystkich argumentach
+for arg in "$@"; do
+    echo "Argument: $arg"
+done
+</code></pre>
+
+<h3>Pętla po liczbach</h3>
+<pre><code class="language-bash">#!/bin/bash
+
+# Od 1 do 10
+for i in {1..10}; do
+    echo "Liczba: $i"
+done
+
+# Składnia C-style
+for (( i=0; i&lt;10; i++ )); do
+    echo "i = $i"
+done
+</code></pre>
+
+<h3>Pętla po plikach</h3>
+<pre><code class="language-bash">#!/bin/bash
+
+# Wszystkie pliki .txt w bieżącym katalogu
+for plik in *.txt; do
+    echo "Przetwarzam: $plik"
+done
+
+# Rekurencyjnie (wymaga shopt -s globstar)
+shopt -s globstar
+for plik in **/*.txt; do
+    echo "Znaleziono: $plik"
+done
+</code></pre>
+
+<h2>4. Czytanie plików</h2>
+
+<h3>Czytanie pliku linia po linii</h3>
+<pre><code class="language-bash">#!/bin/bash
+
+plik=$1
+
+while IFS= read -r linia; do
+    echo "Linia: $linia"
+done &lt; "$plik"
+</code></pre>
+
+<h3>Czytanie pliku z pominięciem nagłówka</h3>
+<pre><code class="language-bash">#!/bin/bash
+
+plik=$1
+
+# Pomiń pierwszą linię (nagłówek)
+tail -n +2 "$plik" | while IFS= read -r linia; do
+    echo "Dane: $linia"
+done
+</code></pre>
+
+<h3>Zliczanie linii</h3>
+<pre><code class="language-bash">#!/bin/bash
+
+liczba_linii=$(wc -l &lt; "$plik")
+echo "Plik ma $liczba_linii linii"
+</code></pre>
+
+<h2>5. Przetwarzanie CSV</h2>
+
+<h3>Czytanie CSV z separatorem średnika</h3>
+<pre><code class="language-bash">#!/bin/bash
+
+plik="dane.csv"
+
+while IFS=';' read -r kolumna1 kolumna2 kolumna3; do
+    echo "Kol1: $kolumna1"
+    echo "Kol2: $kolumna2"
+    echo "Kol3: $kolumna3"
+    echo "---"
+done &lt; "$plik"
+</code></pre>
+
+<h3>CSV z pominięciem nagłówka</h3>
+<pre><code class="language-bash">#!/bin/bash
+
+plik="dane.csv"
+
+# Pobierz nagłówek
+naglowek=$(head -1 "$plik")
+echo "Nagłówek: $naglowek"
+
+# Przetwórz dane (bez nagłówka)
+tail -n +2 "$plik" | while IFS=';' read -r imie rok miesiac; do
+    echo "Imię: $imie, Rok: $rok, Miesiąc: $miesiac"
+done
+</code></pre>
+
+<h3>Sortowanie CSV numerycznie</h3>
+<pre><code class="language-bash">#!/bin/bash
+
+# Sortuj według 2. kolumny numerycznie
+sort -t';' -k2n dane.csv &gt; posortowane.csv
+
+# Sortuj malejąco (od największego)
+sort -t';' -k2nr dane.csv &gt; posortowane.csv
+</code></pre>
+
+<h2>6. Tablice i losowanie</h2>
+
+<h3>Deklaracja i użycie tablicy</h3>
+<pre><code class="language-bash">#!/bin/bash
+
+# Deklaracja tablicy
+opcje=("Kamień" "Papier" "Nożyce")
+
+# Dostęp do elementów
+echo ${opcje[0]}        # Kamień
+echo ${opcje[1]}        # Papier
+echo ${opcje[2]}        # Nożyce
+
+# Wszystkie elementy
+echo ${opcje[@]}
+
+# Długość tablicy
+echo ${#opcje[@]}
+</code></pre>
+
+<h3>Losowanie z tablicy</h3>
+<pre><code class="language-bash">#!/bin/bash
+
+choices=("K" "P" "N")
+
+# Losowy indeks (0-2)
+indeks=$((RANDOM % 3))
+
+# Wylosowany element
+wybor=${choices[$indeks]}
+echo "Wylosowano: $wybor"
+</code></pre>
+
+<h3>Losowanie liczby z zakresu</h3>
+<pre><code class="language-bash">#!/bin/bash
+
+# Liczba od 0 do 9
+liczba=$((RANDOM % 10))
+
+# Liczba od 1 do 10
+liczba=$((RANDOM % 10 + 1))
+
+# Liczba z zakresu min-max
+min=5
+max=15
+liczba=$((RANDOM % (max - min + 1) + min))
+</code></pre>
+
+<h2>7. Konwersje i transformacje</h2>
+
+<h3>Zamiana małych liter na wielkie</h3>
+<pre><code class="language-bash">#!/bin/bash
+
+tekst="hello world"
+
+# Metoda 1: tr
+wielkie=$(echo "$tekst" | tr a-z A-Z)
+echo $wielkie    # HELLO WORLD
+
+# Metoda 2: bash 4.0+
+wielkie=${tekst^^}
+echo $wielkie    # HELLO WORLD
+</code></pre>
+
+<h3>Konwersja systemów liczbowych</h3>
+<pre><code class="language-bash">#!/bin/bash
+
+# Binarny na dziesiętny
+binary="1010"
+decimal=$((2#$binary))
+echo "$binary (bin) = $decimal (dec)"    # 10
+
+# Szesnastkowy na dziesiętny
+hex="FF"
+decimal=$((16#$hex))
+echo "$hex (hex) = $decimal (dec)"       # 255
+
+# Ósemkowy na dziesiętny
+octal="77"
+decimal=$((8#$octal))
+echo "$octal (oct) = $decimal (dec)"     # 63
+</code></pre>
+
+<h3>Zamiana znaków (tr)</h3>
+<pre><code class="language-bash">#!/bin/bash
+
+# ROT13 dla liter
+echo "hello" | tr 'a-zA-Z' 'n-za-mN-ZA-M'    # uryyb
+
+# ROT5 dla cyfr (szyfr zamienny)
+echo "192.168.1.1" | tr '0123456789' '5678901234'    # 647.613.6.6
+
+# Usunięcie znaków
+echo "a-b-c" | tr -d '-'    # abc
+</code></pre>
+
+<h2>8. Wyrażenia regularne</h2>
+
+<h3>Walidacja liczby binarnej</h3>
+<pre><code class="language-bash">#!/bin/bash
+
+liczba=$1
+
+if [[ $liczba =~ ^[01]+$ ]]; then
+    echo "To jest liczba binarna"
+    decimal=$((2#$liczba))
+    echo "Wartość dziesiętna: $decimal"
+else
+    echo "Błąd: To nie jest liczba binarna!"
+    exit 1
+fi
+</code></pre>
+
+<h3>Sprawdzanie adresu IPv4 (uproszczone)</h3>
+<pre><code class="language-bash">#!/bin/bash
+
+ip=$1
+regex='^([0-9]{1,3}\.){3}[0-9]{1,3}$'
+
+if [[ $ip =~ $regex ]]; then
+    echo "To wygląda jak adres IP"
+else
+    echo "To nie jest adres IP"
+fi
+</code></pre>
+
+<h3>Wyszukiwanie IPv4 w tekście</h3>
+<pre><code class="language-bash">#!/bin/bash
+
+plik="test.txt"
+ip_regex='([0-9]{1,3}\.){3}[0-9]{1,3}'
+
+while IFS= read -r linia; do
+    if [[ $linia =~ $ip_regex ]]; then
+        echo "Znaleziono IP: ${BASH_REMATCH[0]}"
+        echo "W linii: $linia"
+    fi
+done &lt; "$plik"
+</code></pre>
+
+<h2>9. Funkcje</h2>
+
+<h3>Funkcja z argumentami</h3>
+<pre><code class="language-bash">#!/bin/bash
+
+powitanie() {
+    local imie=$1
+    local wiek=$2
+    echo "Witaj $imie, masz $wiek lat"
+}
+
+# Wywołanie
+powitanie "Jan" 25
+</code></pre>
+
+<h3>Funkcja zwracająca wartość przez echo</h3>
+<pre><code class="language-bash">#!/bin/bash
+
+oblicz_wiek() {
+    local rok_urodzenia=$1
+    local obecny_rok=2026
+    local wiek=$((obecny_rok - rok_urodzenia))
+    echo $wiek
+}
+
+# Wywołanie i przechwycenie wyniku
+wiek=$(oblicz_wiek 1990)
+echo "Wiek: $wiek"
+</code></pre>
+
+<h3>Funkcja z kodem powrotu</h3>
+<pre><code class="language-bash">#!/bin/bash
+
+czy_parzysta() {
+    local liczba=$1
+    if [ $((liczba % 2)) -eq 0 ]; then
+        return 0    # sukces (parzysta)
+    else
+        return 1    # błąd (nieparzysta)
+    fi
+}
+
+# Wywołanie
+if czy_parzysta 4; then
+    echo "Liczba jest parzysta"
+else
+    echo "Liczba jest nieparzysta"
+fi
+</code></pre>
+
+<h2>10. Operacje na stringach</h2>
+
+<h3>Długość stringa</h3>
+<pre><code class="language-bash">#!/bin/bash
+
+tekst="Hello World"
+dlugosc=${#tekst}
+echo "Długość: $dlugosc"    # 11
+</code></pre>
+
+<h3>Substring (wycinek)</h3>
+<pre><code class="language-bash">#!/bin/bash
+
+tekst="Hello World"
+
+# Od pozycji 0, długość 5
+fragment=${tekst:0:5}
+echo $fragment    # Hello
+
+# Od pozycji 6 do końca
+fragment=${tekst:6}
+echo $fragment    # World
+</code></pre>
+
+<h3>Zamiana w stringu</h3>
+<pre><code class="language-bash">#!/bin/bash
+
+tekst="jabłko gruszka jabłko"
+
+# Zamień pierwsze wystąpienie
+nowy=${tekst/jabłko/pomarańcza}
+echo $nowy    # pomarańcza gruszka jabłko
+
+# Zamień wszystkie wystąpienia
+nowy=${tekst//jabłko/pomarańcza}
+echo $nowy    # pomarańcza gruszka pomarańcza
+</code></pre>
+
+<h3>Usuwanie prefiksu/sufiksu</h3>
+<pre><code class="language-bash">#!/bin/bash
+
+plik="dokument.txt.backup"
+
+# Usuń najmniejszy pasujący sufiks
+bez_backup=${plik%.backup}
+echo $bez_backup    # dokument.txt
+
+# Usuń rozszerzenie
+bez_rozszerzenia=${plik%.*}
+echo $bez_rozszerzenia    # dokument.txt
+
+# Usuń prefix
+plik="/home/user/dokument.txt"
+tylko_nazwa=${plik##*/}
+echo $tylko_nazwa    # dokument.txt
+</code></pre>
+
+<h2>11. Przykłady kompletnych zadań</h2>
+
+<h3>Szybka szachownica (zwięzła wersja)</h3>
+<pre><code class="language-bash">#!/bin/bash
+
+mkdir -p szachownica &amp;&amp; cd szachownica
+
+for col in {a..h}; do
+    for row in {1..8}; do
+        mkdir -p "${col}${row}"
+        col_num=$(($(printf "%d" "'$col") - 96))
+        [ $(( (col_num + row) % 2 )) -eq 0 ] &amp;&amp; color="bialy" || color="czarny"
+        
+        case "$row" in
+            2) piece="WP" ;;
+            7) piece="BP" ;;
+            1) case $col in a|h) piece="WR";; b|g) piece="WN";; c|f) piece="WB";; d) piece="WQ";; e) piece="WK";; esac ;;
+            8) case $col in a|h) piece="BR";; b|g) piece="BN";; c|f) piece="BB";; d) piece="BQ";; e) piece="BK";; esac ;;
+            *) piece="" ;;
+        esac
+        
+        echo "$piece" &gt; "${col}${row}/$color"
+    done
+done
+</code></pre>
+
+<h3>Usuwanie linii z pliku</h3>
+<pre><code class="language-bash">#!/bin/bash
+
+grep -v "$2" "$1" &gt; tmp &amp;&amp; mv tmp "$1"
+</code></pre>
+
+<h3>Kamień, papier, nożyce</h3>
+<pre><code class="language-bash">#!/bin/bash
+
+choices=(K P N)
+read -p "Wybierz K/P/N: " p
+p=$(echo "$p" | tr a-z A-Z)
+c=${choices[$((RANDOM % 3))]}
+
+echo "Ty: $p, Komputer: $c"
+
+[ "$p" == "$c" ] &amp;&amp; echo "REMIS!" &amp;&amp; exit
+[[ "$p$c" =~ ^(KN|PK|NP)$ ]] &amp;&amp; echo "WYGRANA!" || echo "PRZEGRANA!"
+</code></pre>
+
+<h3>Konwerter binarny na dziesiętny</h3>
+<pre><code class="language-bash">#!/bin/bash
+
+for b in "$@"; do
+    if [[ $b =~ ^[01]+$ ]]; then
+        echo "$b (bin) = $((2#$b)) (dec)"
+    else
+        echo "Błąd: '$b' nie jest liczbą binarną!"
+    fi
+done
+</code></pre>
+
+<h3>Szyfrowanie cyfr ROT5</h3>
+<pre><code class="language-bash">#!/bin/bash
+
+tr '0123456789' '5678901234' &lt; test.txt &gt; tmp &amp;&amp; mv tmp test.txt
+</code></pre>
+
+<h3>CSV - 10 najmłodszych i najstarszych</h3>
+<pre><code class="language-bash">#!/bin/bash
+
+header=$(head -1 dane.csv)
+sorted=$(tail -n +2 dane.csv | awk -F';' '{print 2026-$2";"$0}' | sort -t';' -k1n)
+
+echo "$header" &gt; new.csv
+echo "$sorted" | head -10 | cut -d';' -f2- &gt;&gt; new.csv
+
+echo "$header" &gt; old.csv
+echo "$sorted" | tail -10 | cut -d';' -f2- &gt;&gt; old.csv
+</code></pre>
+
+<div class="note">
+<strong>Wskazówka:</strong> Wszystkie te przykłady można kopiować i modyfikować według potrzeb. Pamiętaj o nadaniu uprawnień wykonywania: <code>chmod +x skrypt.sh</code>
+</div>
+
+</body>
+</html>

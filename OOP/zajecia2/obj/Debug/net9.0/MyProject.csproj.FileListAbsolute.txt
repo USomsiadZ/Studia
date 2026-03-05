@@ -1,0 +1,12 @@
+/Users/hubert/Github/studia/OOP/zajecia2/bin/Debug/net9.0/MyProject.deps.json
+/Users/hubert/Github/studia/OOP/zajecia2/bin/Debug/net9.0/MyProject.dll
+/Users/hubert/Github/studia/OOP/zajecia2/bin/Debug/net9.0/MyProject.pdb
+/Users/hubert/Github/studia/OOP/zajecia2/obj/Debug/net9.0/MyProject.GeneratedMSBuildEditorConfig.editorconfig
+/Users/hubert/Github/studia/OOP/zajecia2/obj/Debug/net9.0/MyProject.AssemblyInfoInputs.cache
+/Users/hubert/Github/studia/OOP/zajecia2/obj/Debug/net9.0/MyProject.AssemblyInfo.cs
+/Users/hubert/Github/studia/OOP/zajecia2/obj/Debug/net9.0/MyProject.csproj.CoreCompileInputs.cache
+/Users/hubert/Github/studia/OOP/zajecia2/obj/Debug/net9.0/MyProject.sourcelink.json
+/Users/hubert/Github/studia/OOP/zajecia2/obj/Debug/net9.0/MyProject.dll
+/Users/hubert/Github/studia/OOP/zajecia2/obj/Debug/net9.0/refint/MyProject.dll
+/Users/hubert/Github/studia/OOP/zajecia2/obj/Debug/net9.0/MyProject.pdb
+/Users/hubert/Github/studia/OOP/zajecia2/obj/Debug/net9.0/ref/MyProject.dll

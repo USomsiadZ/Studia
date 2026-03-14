@@ -11,3 +11,5 @@ easy/test.ipynb
 .github
 .ignore
 .cursor
+obj/
+bin/

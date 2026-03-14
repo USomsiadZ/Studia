@@ -7,4 +7,3 @@ StreamReader readerKlucz = new StreamReader("klucz.txt");
 string liniaKlucz = readerKlucz.ReadLine();
 readerKlucz.Close();
 */
-

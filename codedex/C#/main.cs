@@ -1,23 +1,25 @@
-using System;
-
-
 namespace main
 {
-    class Program
+    class Rob()
     {
-        static void Metoda(string pr = "test", string pr2 = "2")
+        private string name = "0";
+        public string Name
         {
-            Console.WriteLine(pr + pr2);
-        }
-        static void Metoda(string pr = "test", int pr2 = 2)
-        {
-            Console.WriteLine(pr + pr2);
+            get { return "liczba: " + name; }
+            set { name = value; }
         }
 
+
+    }
+    class Program
+    {
         static void Main()
         {
-            Metoda(pr2: "3");
-            Metoda(pr2: 3);
+            Rob p = new()
+            {
+                Name = "1"
+            };
+            Console.WriteLine(p.Name);
 
         }
     }

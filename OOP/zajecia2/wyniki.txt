@@ -1,6 +1,2 @@
-Jan Kowalski
-Ilość poprawnych: 10
-Procent: 100%
-Anna Nowak
-Ilość poprawnych: 8
-Procent: 80%
+Jan Kowalski 100%
+Anna Nowak 80%

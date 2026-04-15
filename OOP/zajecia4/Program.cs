@@ -40,12 +40,14 @@ namespace OOP.zajecia4
         private int Dzien = 0;
         private bool CzyLimit => Liczba_operacji < Limit_operacji_dzienny;
 
+
         public Karta(int limit_operacji_dzienny = 10, string wlasciciel = "")
         {
             if (string.IsNullOrEmpty(wlasciciel))
             {
                 throw new Exception("Nie podano właściciela");
             }
+            //.ToString("D4")
             Numer_karty = new Random().Next(1000, 9999);
             Wlasciciel = wlasciciel;
             Limit_operacji_dzienny = limit_operacji_dzienny;
@@ -91,7 +93,7 @@ namespace OOP.zajecia4
             }
             else
             {
-                Console.WriteLine("Brak zadłużenia");
+                Console.WriteLine("Brak zadłużenia");/*  */
             }
 
         }
@@ -177,3 +179,6 @@ namespace OOP.zajecia4
         }
     }
 }
+
+
+

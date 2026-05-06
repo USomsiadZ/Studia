@@ -143,6 +143,7 @@ public class Kwadrat : Figura
         prawa = new Odcinek(pd, pg);
         gora = new Odcinek(pg, lg);
         lewa = new Odcinek(lg, ld);
+
     }
 
     public override double Obwod() => dol.Obwod() + prawa.Obwod() + gora.Obwod() + lewa.Obwod();
@@ -197,5 +198,7 @@ class Program
         Console.WriteLine("\nPrzesuwam odcinek o (10, 5):");
         od.Przesun(10, 5);
         obraz.Wypisz();
+        Obraz obraz2 = new Obraz();
+        obraz2.Wypisz();
     }
 }
